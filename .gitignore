@@ -1,0 +1,67 @@
+# 컴파일된 클래스 파일
+*.class
+
+# 로그 파일
+*.log
+*.out
+*.err
+
+# 빌드 디렉토리
+/bin/
+/build/
+/target/
+
+# IntelliJ IDEA 관련 파일
+.idea/
+*.iml
+
+# Eclipse 관련 파일
+.project
+.classpath
+.settings/
+
+# Maven 관련 파일
+/.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle 관련 파일
+.gradle/
+build/
+.gradle-cache/
+!gradle-wrapper.jar
+
+# 데이터베이스 설정 파일 (예: db.properties)
+db.properties
+
+# OS 관련 파일
+.DS_Store
+Thumbs.db
+
+# IDE 특정 구성 파일
+.vscode/
+*.code-workspace
+
+# 테스트 결과
+/test-output/
+surefire-reports/
+
+# 실행 파일
+*.war
+*.ear
+*.jar
+
+# 임시 파일
+*.tmp
+*.bak
+*.swp
+
+# Oracle DB 관련 파일 (필요하면 추가)
+*.dmp
+*.log
+*.sql~
+*.plb~
+*.trc
+
+# 라이브러리 디렉토리
+/lib/
