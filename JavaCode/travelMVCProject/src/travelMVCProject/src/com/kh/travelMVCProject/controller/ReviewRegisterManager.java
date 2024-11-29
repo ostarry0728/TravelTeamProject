@@ -137,7 +137,7 @@ public class ReviewRegisterManager {
 	    	try {
 	    		Connection con = DBUtility.dbCon();
 	    		PreparedStatement pstmt = con.prepareStatement(
-	    				"SELECT NO, "
+	    				"SELECT NO, RESERV_ID, GUIDE_REVIEW, SCHE_REVIEW, AVG_REVIEW FROM REVIEW WHERE NO = ?"
 	    				);
 	    		pstmt.setInt(1, no);	
 	    		
