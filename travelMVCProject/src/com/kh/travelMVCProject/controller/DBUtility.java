@@ -14,7 +14,7 @@ public class DBUtility {
 	public static Connection dbCon() {
 		Connection con = null;
 		// 1. db.properties file( id, pw, url setting)
-		String filePath = "D:\\JavaPrac\\travelMVCProject\\src\\db.properties";
+		String filePath = "D:\\TravelTeamProject\\travelMVCProject\\src\\db.properties";
 		Properties pt = new Properties();
 		try {
 			pt.load(new FileReader(filePath));
