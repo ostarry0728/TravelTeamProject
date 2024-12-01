@@ -19,7 +19,7 @@ public class GuideRegisterManager {
 		if (guideList.size() != 0) {
 			printGuideList(guideList);
 		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
+			System.out.println("가이드 정보가 존재하지 않습니다.");
 			return;
 		}
 	}
@@ -29,39 +29,41 @@ public class GuideRegisterManager {
 		GuideDAO gdao = new GuideDAO();
 		GuideVO gvo = new GuideVO();
 
-		// 전체 가이드 출력
-		ArrayList<GuideVO> guideList = gdao.guideSelect(gvo);
-		if (guideList.size() != 0) {
-			printGuideList(guideList);
-		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
-		}
+
 
 		System.out.println();
 		System.out.println("가이드 정보 입력");
 		String id = makeId();
-		System.out.print("이름 :");
+		System.out.print("가이드의 이름을 입력해주세요 >> ");
 		String name = (sc.nextLine()).trim();
-		System.out.print("전화번호 010-xxxx-xxxx :");
+		System.out.print("가이드의 전화번호를 입력해주세요 (형식:010-xxxx-xxxx) >> ");
 		String phone = (sc.nextLine()).trim();
-		System.out.print("사용 언어 :");
-		String languages = (sc.nextLine()).trim();
+		System.out.print("가이드가 사용하는 언어를 입력해주세요 :");
+		String languages = (sc.nextLine());
 
 		gvo = new GuideVO(0, id, name, phone, languages);
 		boolean successFlag = gdao.guideInsert(gvo);
 
 		if (successFlag == true) {
-			System.out.println(name + "가이드 정보를 등록하였습니다.");
+			System.out.println(name + " 가이드 정보를 등록하였습니다.");
 		} else {
-			System.out.println(name + "가이드 정보를 등록 실패하였습니다.");
+			System.out.println(name + " 가이드 정보를 등록 실패하였습니다.");
 		}
-		// 전체 가이드 출력
-		guideList = gdao.guideSelect(gvo);
-		if (guideList.size() != 0) {
-			printGuideList(guideList);
-		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
-		}
+		
+//		// 전체 가이드 출력
+//		ArrayList<GuideVO> guideList = gdao.guideSelect(gvo);
+//		if (guideList.size() != 0) {
+//			printGuideList(guideList);
+//		} else {
+//			System.out.println("가이드 정보가 존재하지 않습니다.");
+//		}
+//		// 전체 가이드 출력
+//		guideList = gdao.guideSelect(gvo);
+//		if (guideList.size() != 0) {
+//			printGuideList(guideList);
+//		} else {
+//			System.out.println("가이드가 존재하지 않습니다.");
+//		}
 	}
 
 	// update
@@ -74,18 +76,18 @@ public class GuideRegisterManager {
 		if (guideList.size() != 0) {
 			printGuideList(guideList);
 		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
+			System.out.println("가이드 정보가 존재하지 않습니다.");
 			return;
 		}
 		// 수정할 정보
-		System.out.print("수정할 가이드의 번호를 입력하세요 : ");
+		System.out.print("수정할 가이드의 번호를 선택하세요 >> ");
 		int no = Integer.parseInt((sc.nextLine()).trim());
 		String id = makeId();
-		System.out.print("수정할 이름 : ");
+		System.out.print("수정할 가이드의 이름을 입력해주세요 >> ");
 		String name = (sc.nextLine()).trim();
-		System.out.print("수정할 전화번호 010-xxxx-xxxx : ");
+		System.out.print("수정할 전화번호를 입력해주세요 (형식:010-xxxx-xxxx) >> ");
 		String phone = (sc.nextLine()).trim();
-		System.out.print("수정할 사용 언어 : ");
+		System.out.print("수정할 사용하는 언어를 입력해주세요 :");
 		String languages = (sc.nextLine()).trim();
 
 		gvo = new GuideVO(no, id, name, phone, languages);
@@ -108,7 +110,7 @@ public class GuideRegisterManager {
 		if (guideList.size() != 0) {
 			printGuideList(guideList);
 		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
+			System.out.println("가이드 정보가 존재하지 않습니다.");
 			return;
 		}
 
@@ -133,20 +135,29 @@ public class GuideRegisterManager {
 		ArrayList<GuideVO> guideList = gdao.guideSort(gvo);
 		if (guideList.size() != 0) {
 			printGuideList(guideList);
-		} else {
-			System.out.println("가이드가 존재하지 않습니다.");
+		} else { 
+			System.out.println("가이드 정보가 존재하지 않습니다.");
 			return;
 		}
 	}
 
 	// 전체 가이드 리스트
 	public void printGuideList(ArrayList<GuideVO> guideList) {
-		System.out.println("------------------------------------------------------------------------------");
-		for (GuideVO data : guideList) {
-			System.out.println(data);
-		}
-		System.out.println("------------------------------------------------------------------------------");
+		System.out.println();
+	    // 헤더 출력
+	    System.out.printf(
+	        "%-9s %-14s %-15s %-14s %-20s\n",
+	        "가이드No", "가이드ID", "이름", "전화번호", "가능언어"
+	    );
+	    System.out.println("----------------------------------------------------------------------------");
+
+	    // 데이터 출력 (toString 사용)
+	    for (GuideVO data : guideList) {
+	        System.out.println(data.toString());
+	    }
+	    System.out.println();
 	}
+
 
 	// 랜덤ID생성
 	public static String makeId() {

@@ -36,7 +36,7 @@ public class ReviewDAO {
 	public final static String REVIEW_UPDATE = 
 		    "UPDATE REVIEW SET GUIDE_REVIEW = ?, SCHE_REVIEW = ? WHERE RESERV_ID = ?";
 
-	public final String REVIEW_DELETE = "DELETE FROM REVIEW WHERE RESERV_ID = ?";
+	public final String REVIEW_DELETE = "DELETE FROM REVIEW WHERE NO = ?";
 	public final String REVIEW_SORT = "SELECT * FROM REVIEW ORDER BY AVG_REVIEW DESC";
 	
 	
@@ -236,7 +236,7 @@ public class ReviewDAO {
 		try {
 			con = DBUtility.dbCon();
 			pstmt = con.prepareStatement(REVIEW_DELETE);
-			pstmt.setString(1, rvo.getReservId());
+			pstmt.setInt(1, rvo.getNo());
 			int result = pstmt.executeUpdate();
 			successFlag = (result != 0) ? true : false ;
 		} catch(SQLException e) {
