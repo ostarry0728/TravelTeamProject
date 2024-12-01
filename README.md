@@ -7,17 +7,7 @@
 <br/>
 <br/>
 
-# 2. Team Members (팀원 및 팀 소개)
-| 오승택 | 전지연 | 권민성 | 김연아 |
-|:------:|:------:|:------:|:------:|
-| <img src="https://github.com/user-attachments/assets/c1c2b1e3-656d-4712-98ab-a15e91efa2da" alt="이동규" width="150"> | <img src="https://github.com/user-attachments/assets/78ec4937-81bb-4637-975d-631eb3c4601e" alt="신유승" width="150"> | <img src="https://github.com/user-attachments/assets/78ce1062-80a0-4edb-bf6b-5efac9dd992e" alt="김나연" width="150"> | <img src="https://github.com/user-attachments/assets/beea8c64-19de-4d91-955f-ed24b813a638" alt="이승준" width="150"> |
-| 팀장 | 부팀장 | 팀원 | 팀원 |
-| [GitHub](https://github.com/LDK1009) | [GitHub](https://github.com/jiyeonjeon01) | [GitHub](https://github.com/kwonminsung0) | [GitHub](https://github.com/KimYeonA1) |
-
-<br/>
-<br/>
-
-# 3. Key Features (주요 기능)
+# 2. Key Features (주요 기능)
 - **(기능기입)**:
   - (기능설명)
 
@@ -42,18 +32,7 @@
 <br/>
 <br/>
 
-# 4. Tasks & Responsibilities (작업 및 역할 분담)
-|  |  |  |
-|-----------------|-----------------|-----------------|
-| 오승택    |  <img src="https://github.com/user-attachments/assets/c1c2b1e3-656d-4712-98ab-a15e91efa2da" alt="이동규" width="100"> | <ul><li>프로젝트 계획 및 관리</li><li>팀 리딩 및 커뮤니케이션</li><li>커스텀훅 개발</li></ul>     |
-| 전지연   |  <img src="https://github.com/user-attachments/assets/78ec4937-81bb-4637-975d-631eb3c4601e" alt="신유승" width="100">| <ul><li>메인 페이지 개발</li><li>동아리 만들기 페이지 개발</li><li>커스텀훅 개발</li></ul> |
-| 권민성   |  <img src="https://github.com/user-attachments/assets/78ce1062-80a0-4edb-bf6b-5efac9dd992e" alt="김나연" width="100">    |<ul><li>홈 페이지 개발</li><li>로그인 페이지 개발</li><li>동아리 찾기 페이지 개발</li><li>동아리 프로필 페이지 개발</li><li>커스텀훅 개발</li></ul>  |
-| 김연아    |  <img src="https://github.com/user-attachments/assets/beea8c64-19de-4d91-955f-ed24b813a638" alt="이승준" width="100">    | <ul><li>회원가입 페이지 개발</li><li>마이 프로필 페이지 개발</li><li>커스텀훅 개발</li></ul>    |
-
-<br/>
-<br/>
-
-# 5. Technology Stack (기술 스택)
+# 3. Technology Stack (기술 스택)
 ## 5.1 Language
 |  |  |
 |-----------------|-----------------|
@@ -62,7 +41,7 @@
 
 <br/>
 
-# 6. Project Structure (프로젝트 구조)
+# 4. Project Structure (프로젝트 구조)
 ```plaintext
 project/
 ├── public/
