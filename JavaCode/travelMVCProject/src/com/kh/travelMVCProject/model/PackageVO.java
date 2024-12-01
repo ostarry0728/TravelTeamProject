@@ -81,10 +81,10 @@ public class PackageVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getpCapacity() {
+	public int getPCapacity() {
 		return pCapacity;
 	}
-	public void setpCapacity(int pCapacity) {
+	public void setPCapacity(int pCapacity) {
 		this.pCapacity = pCapacity;
 	}
 	public String getNational() {
@@ -105,16 +105,16 @@ public class PackageVO {
 	public void setGuideId(String guideId) {
 		this.guideId = guideId;
 	}
-	public Date getsDate() {
+	public Date getSDate() {
 		return sDate;
 	}
-	public void setsDate(Date sDate) {
+	public void setSDate(Date sDate) {
 		this.sDate = sDate;
 	}
-	public Date geteDate() {
+	public Date getEDate() {
 		return eDate;
 	}
-	public void seteDate(Date eDate) {
+	public void setEDate(Date eDate) {
 		this.eDate = eDate;
 	}
 
