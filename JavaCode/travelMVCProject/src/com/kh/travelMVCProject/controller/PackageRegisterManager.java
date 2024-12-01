@@ -41,107 +41,253 @@ public class PackageRegisterManager {
 	}
 
 	
-	// insert 
+	// insert
 	public void insertManager() {
+
 	    PackageDAO pdao = new PackageDAO();
 	    GuideDAO gdao = new GuideDAO();
-	    
+	    GuideVO gvo = new GuideVO();
+
 	    // 가이드 리스트 출력
-	    ArrayList<GuideVO> guideList = gdao.guideSelect();
+	    ArrayList<GuideVO> guideList = gdao.guideSelect(gvo);
 	    if (guideList == null || guideList.isEmpty()) {
 	        System.out.println("가이드 데이터가 없습니다.");
 	        return;
 	    }
 	    System.out.println("가이드 전체 리스트");
-	    for (GuideVO gvo : guideList) {
-	        System.out.println(gvo);
+	    for (GuideVO data : guideList) {
+	        System.out.println(data);
 	    }
-	    
+
 	    // 입력받기
 	    System.out.print("함께할 가이드 id 선택하기: ");
 	    String guideId = sc.nextLine();
-	    
+
 	    // 랜덤 ID 생성 및 중복 검사
 	    String id = generateRandomId();
 	    while (pdao.isIdDuplicate(id)) { // 중복 검사
 	        id = generateRandomId();
 	    }
 	    System.out.println("생성된 랜덤 패키지 ID: " + id);
-	    
+
 	    System.out.print("여행 상품 이름 입력하기: ");
 	    String name = sc.nextLine();
-	    
+
 	    System.out.print("여행 상품 수량 입력하기: ");
-	    int pCapacity = Integer.parseInt(sc.nextLine());
-	    
+	    int pCapacity = 0;
+	    while (true) {
+	        try {
+	            pCapacity = Integer.parseInt(sc.nextLine());
+	            if (pCapacity > 0) break;
+	            System.out.println("상품 수량은 1 이상의 값을 입력하세요.");
+	        } catch (NumberFormatException e) {
+	            System.out.println("정확한 숫자를 입력하세요.");
+	        }
+	    }
+
 	    System.out.print("여행 가는 국가 입력하기: ");
 	    String national = sc.nextLine();
-	    
+
 	    System.out.println("여행 상품 가격 입력하기: ");
-	    int price = Integer.parseInt(sc.nextLine());
-	    
-	    // 날짜 입력받기
+	    int price = 0;
+	    while (true) {
+	        try {
+	            price = Integer.parseInt(sc.nextLine());
+	            if (price > 0) break;
+	            System.out.println("상품 가격은 1 이상의 값을 입력하세요.");
+	        } catch (NumberFormatException e) {
+	            System.out.println("정확한 숫자를 입력하세요.");
+	        }
+	    }
+
+	    // 날짜 입력 처리
 	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	    formatter.setLenient(false); // 엄격한 형식 검사
-	    
+	    formatter.setLenient(false);
+
 	    Date sDate = null;
 	    System.out.println("여행 시작 날짜 입력하기 (형식: yyyy-MM-dd): ");
 	    while (sDate == null) {
 	        try {
-	            String startDateStr = sc.nextLine();
-	            sDate = (Date) formatter.parse(startDateStr);
+	            String startDateStr = sc.nextLine().trim();
+	            java.util.Date utilDate = formatter.parse(startDateStr);
+	            sDate = new java.sql.Date(utilDate.getTime());
 	        } catch (ParseException e) {
 	            System.out.println("잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 다시 입력해주세요.");
 	        }
 	    }
+
+	    Date eDate = null;
+	    System.out.println("여행 종료 날짜 입력하기 (형식: yyyy-MM-dd): ");
+	    while (eDate == null) {
+	        try {
+	            String endDateStr = sc.nextLine().trim();
+	            java.util.Date utilDate = formatter.parse(endDateStr);
+	            eDate = new java.sql.Date(utilDate.getTime());
+	        } catch (ParseException e) {
+	            System.out.println("잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 다시 입력해주세요.");
+	        }
+	    }
+
+	    // PackageVO 생성
+	    PackageVO pvo = new PackageVO(id, name, pCapacity, national, price, guideId, sDate, eDate);
+
+	    // 데이터 삽입
+	    boolean successFlag = pdao.packageInsert(pvo);
+
+	    if (successFlag) {
+	        System.out.println("여행 상품 정보가 성공적으로 입력되었습니다.");
+
+	        // 삽입된 데이터 확인
+	        try {
+	            Connection con = DBUtility.dbCon();
+	            PreparedStatement pstmt = con.prepareStatement(
+	                "SELECT NO, ID, NAME, PCAPACITY, NATIONAL, PRICE, GUIDE_ID, SDATE, EDATE FROM PACKAGE WHERE GUIDE_ID = ?"
+	            );
+
+	            pstmt.setString(1, guideId);
+
+	            ResultSet rs = pstmt.executeQuery();
+
+	            while (rs.next()) {
+	                int no = rs.getInt("NO");
+	                System.out.println("삽입된 상품 번호: " + no);
+	            }
+
+	            DBUtility.dbClose(con, pstmt, rs);
+	        } catch (SQLException e) {
+	            System.out.println("삽입된 상품 정보 확인 중 예외: " + e.getMessage());
+	        }
+	    } else {
+	        System.out.println("여행 상품 정보 입력에 실패하였습니다.");
+	    }
+	}
+
+
+	
+	// update 
+	public void updateManager() {
+		PackageDAO pdao = new PackageDAO();
+		ArrayList<PackageVO> packageList = pdao.packageSelect();
+		
+		if(packageList == null || packageList.isEmpty()) {
+			System.out.println("데이터가 존재하지 않습니다.");
+			return;
+		}
+		printPackageList(packageList);
+		
+		System.out.println("수정할 패키지의 패키지 no를 입력하세요(정수값): ");
+		int no = Integer.parseInt(sc.nextLine());
+		
+		boolean noExists = packageList.stream().anyMatch(pvo -> pvo.getNo() == no);
+		if(!noExists) {
+			System.out.println("입력한 패키지 번호가 존재하지 않습니다. 다시 시도해주세요");
+			return;
+		}
+		
+		System.out.println("수정할 여행상품 이름을 입력해주세요: ");
+		String name = sc.nextLine();
+		
+		System.out.println("수정할 여행상품 수량을 입력해주세요: ");
+		int pCapacity = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("수정할 여행상품 국가를 입력해주세요: ");
+		String national = sc.nextLine();
+		
+		System.out.println("수정할 여행상품 가격을 입력해주세요: ");
+		int price = Integer.parseInt(sc.nextLine());
+		
+		// 가이드 보여주기
+		System.out.println("수정할 여행상품의 가이드를 입력해주세요: ");
+		String guideId = sc.nextLine();
+		
+		boolean guideExists = packageList.stream().anyMatch(pvo -> pvo.getGuideId() == guideId);
+		if(!guideExists) {
+			System.out.println("입력한 가이드 존재하지 않습니다. 다시 시도해주세요");
+			return;
+		}
+		
+		 // 날짜 입력받기
+//	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//	    formatter.setLenient(false); // 엄격한 형식 검사
+//	    
+//	    Date sDate = null;
+//	    System.out.println("여행 시작 날짜 입력하기 (형식: yyyy-MM-dd): ");
+//	    while (sDate == null) {
+//	        try {
+//	            String startDateStr = sc.nextLine();
+//	            sDate = (Date) formatter.parse(startDateStr);
+//	        } catch (ParseException e) {
+//	            System.out.println("잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 다시 입력해주세요.");
+//	        }
+//	    
+        // 날짜 입력 처리
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setLenient(false);
+
+        Date sDate = null;
+        System.out.println("여행 시작 날짜 입력하기 (형식: yyyy-MM-dd): ");
+        while (sDate == null) {
+            try {
+                String startDateStr = sc.nextLine().trim();
+                java.util.Date utilDate = formatter.parse(startDateStr);
+                sDate = new java.sql.Date(utilDate.getTime());
+            } catch (ParseException e) {
+                System.out.println("잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 다시 입력해주세요.");
+            }
+        }
+
+		
 	    
 	    Date eDate = null;
 	    System.out.println("여행 종료 날짜 입력하기 (형식: yyyy-MM-dd): ");
 	    while (eDate == null) {
 	        try {
-	            String endDateStr = sc.nextLine();
-	            eDate = (Date) formatter.parse(endDateStr);
+	            String endDateStr = sc.nextLine().trim();
+	            java.util.Date utilDate = formatter.parse(endDateStr);
+	            eDate = new java.sql.Date(utilDate.getTime());
 	        } catch (ParseException e) {
 	            System.out.println("잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 다시 입력해주세요.");
 	        }
 	    }
 	    
-	    PackageVO pvo = new PackageVO(id, name, pCapacity, national, price, guideId, sDate, eDate);
+	    System.out.println("수정된 여행상품 번호: " + no + ", 이름: " + name 
+	    		+ ", 수량: "  + pCapacity + ", 국가: " + national + ", 가격: " + price 
+	    		+ ", 가이드: "  + guideId + ", 출발날짜: " + sDate + ", 도착날짜: " + eDate);
+		PackageVO pvo = new PackageVO();
+		pvo.setNo(no);
+		pvo.setName(name);
+		pvo.setPCapacity(pCapacity);
+		pvo.setNational(national);
+		pvo.setPrice(price);
+		pvo.setGuideId(guideId);
+		pvo.setSDate(sDate);
+		pvo.setEDate(eDate);
 		
-		// 데이터 삽입
-	    boolean successFlag = pdao.packageInsert(pvo);
-	    
-	    if(successFlag) {
-	    	System.out.println("여행 상품 정보가 성공적으로 입력되었습니다.");
-	    	
-	    	try {
-	    		Connection con = DBUtility.dbCon();
-	    		PreparedStatement pstmt = con.prepareStatement(
-	    				"SELECT NO, ID, NAME,  PCAPATIRY, NATIONAL, PRICE, GUIDE_ID, SDATE, EDATE FROM PACKAGE WHERE GUIDE_ID = ?"
-	    				);
-	    		
-	    		pstmt.setString(1, guideId);
-	    		
-	    		ResultSet rs = pstmt.executeQuery();
-	    		
-	    		if(rs.next()) {
-	    			int no = rs.getInt("NO");
-	    			
-	    			System.out.println("no = " + no);
-	    		}
-	    		
-	    	} catch (SQLException e) {
-	    		System.out.println("여행상품 입력 중 예외: " + e.getMessage());
-	    	}
-	    } else {
-	    	System.out.println("여행상품 정보 입력에 실패하였습니다.");
-	    }
-
-	}
-
-	
-	// update 
-	public void updateManager() {
+		boolean successFlag = PackageDAO.packageUpdate(pvo);
+		
+		if(successFlag) {
+			System.out.println("수정처리 성공");
+			
+			try {
+				Connection con = DBUtility.dbCon();
+				PreparedStatement pstmt = con.prepareStatement(
+						"SELECT NO, NAME, PCAPATIRY, NATIONAL, PRICE, GUIDE_ID, SDATE, EDATE WHERE PACKAGE WHERE NO = ?"
+						);
+				pstmt.setInt(1, no);
+				
+				ResultSet rs = pstmt.executeQuery();
+				
+				
+			}catch(SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		} else {
+			System.out.println("수정처리 실패");
+			return;
+		}
+		
+		
+		
 		
 	}
 

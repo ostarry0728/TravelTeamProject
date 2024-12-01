@@ -30,11 +30,11 @@ public class TravelMain {
 				case MENU_CHOICE.CUSTOMER:
 					customerMenu();
 					break;
-				case MENU_CHOICE.PACKAGE:
-					packageMenu();
-					break;
 				case MENU_CHOICE.GUIDE:
 					guideMenu();
+					break;
+				case MENU_CHOICE.PACKAGE:
+					packageMenu();
 					break;
 				case MENU_CHOICE.RESERVATION:
 					reservationMenu();
@@ -49,8 +49,10 @@ public class TravelMain {
 				default:
 					System.out.println("해당 메뉴 번호만 입력하세요.");
 				}
+			} catch (NumberFormatException e) {
+			    System.out.println("숫자 형식으로 입력해주세요.");
 			} catch (Exception e) {
-				System.out.println("입력에 오류가 있습니다. 프로그램을 다시 시작하세요 ");
+			    System.out.println("예기치 못한 오류가 발생했습니다: " + e.getMessage());
 			}
 		}
 	}
@@ -81,9 +83,44 @@ public class TravelMain {
 			break;
 		case CUSTOMER_CHOICE.SORT:
 			System.out.println("");
-			crm.sortManager();
+			crm.selectSortManager();
 			break;
 		case CUSTOMER_CHOICE.MAIN:
+			return;
+		default:
+			System.out.println("해당 메뉴 번호만 입력하세요.");
+		}
+	}
+	
+	
+	public static void guideMenu() {
+		int no;
+		GuideRegisterManager grm = new GuideRegisterManager();
+		
+		MenuViewer.guideMenuView();
+		no = Integer.parseInt(sc.nextLine());
+		switch(no) {
+		case GUIDE_CHOICE.LIST:
+			System.out.println("");
+			grm.selectManager();
+			break;
+		case GUIDE_CHOICE.INSERT:
+			System.out.println("");
+			grm.insertManager();
+			break;
+		case GUIDE_CHOICE.UPDATE:
+			System.out.println("");
+			grm.updateManager();
+			break;
+		case GUIDE_CHOICE.DELETE:
+			System.out.println("");
+			grm.deleteManager();
+			break;
+		case GUIDE_CHOICE.SORT:
+			System.out.println("");
+			grm.sortManager();
+			break;
+		case GUIDE_CHOICE.MAIN:
 			return;
 		default:
 			System.out.println("해당 메뉴 번호만 입력하세요.");
@@ -125,39 +162,6 @@ public class TravelMain {
 		}
 	}
 	
-	public static void guideMenu() {
-		int no;
-		GuideRegisterManager grm = new GuideRegisterManager();
-		
-		MenuViewer.guideMenuView();
-		no = Integer.parseInt(sc.nextLine());
-		switch(no) {
-		case GUIDE_CHOICE.LIST:
-			System.out.println("");
-			grm.selectManager();
-			break;
-		case GUIDE_CHOICE.INSERT:
-			System.out.println("");
-			grm.insertManager();
-			break;
-		case GUIDE_CHOICE.UPDATE:
-			System.out.println("");
-			grm.updateManager();
-			break;
-		case GUIDE_CHOICE.DELETE:
-			System.out.println("");
-			grm.deleteManager();
-			break;
-		case GUIDE_CHOICE.SORT:
-			System.out.println("");
-			grm.sortManager();
-			break;
-		case GUIDE_CHOICE.MAIN:
-			return;
-		default:
-			System.out.println("해당 메뉴 번호만 입력하세요.");
-		}
-	}
 	
 	public static void reservationMenu() {
 		int no;
@@ -184,7 +188,7 @@ public class TravelMain {
 			break;
 		case RESERVATION_CHOICE.SORT:
 			System.out.println("");
-			rrm.sortManager();
+			rrm.selectSortManager();
 			break;
 		case RESERVATION_CHOICE.MAIN:
 			return;
@@ -192,6 +196,7 @@ public class TravelMain {
 			System.out.println("해당 메뉴 번호만 입력하세요.");
 		}
 	}
+	
 	
 	public static void reviewMenu() {
 		int no;
