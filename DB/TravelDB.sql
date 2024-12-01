@@ -53,7 +53,7 @@ CREATE TABLE PACKAGE (
     NO NUMBER, --PK
     ID VARCHAR2(30),--UK
     NAME VARCHAR2(50) NOT NULL,
-    PCAPACITY NUMBER,
+--    PCAPACITY NUMBER,
     NATIONAL VARCHAR2(20) NOT NULL,
     PRICE NUMBER NOT NULL,
     GUIDE_ID VARCHAR2(30), --FK
@@ -62,7 +62,7 @@ CREATE TABLE PACKAGE (
 );
 Alter table PACKAGE add constraint PACKAGE_NO_PK primary key(NO);
 Alter table PACKAGE add constraint PACKAGE_ID_UK UNIQUE(ID);   
-Alter table PACKAGE add constraint PACKAGS_GUIDE_ID_FK 
+Alter table PACKAGE add constraint PACKAGE_GUIDE_ID_FK 
     FOREIGN key(GUIDE_ID) References GUIDE(ID) on delete set null;
  
 
@@ -70,22 +70,25 @@ CREATE SEQUENCE PACKAGE_SEQ
 START WITH 1
 INCREMENT BY 1;
 
+--drop table reservation;
+--drop table review;
 -- 예약 테이블
 CREATE TABLE RESERVATION(
     NO NUMBER, --PK
     ID VARCHAR2(30), --UK
     CUST_ID VARCHAR2(30), --FK
     PACK_ID VARCHAR2(30), --FK
-    RCAPACITY NUMBER NOT NULL,
+--    RCAPACITY NUMBER NOT NULL,
     METHOD VARCHAR2(20) NOT NULL,
     RDATE DATE DEFAULT SYSDATE
 );
 Alter table RESERVATION add constraint RESERVATION_NO_PK primary key(NO);
 Alter table RESERVATION add constraint RESERVATION_ID_UK UNIQUE(ID);  
 Alter table RESERVATION add constraint RESERVATION_CUST_ID_FK 
-    FOREIGN key(CUST_ID) References CUSTOMERS(ID) on delete set null;
+    FOREIGN key(CUST_ID) References CUSTOMER(ID) on delete set null;
 Alter table RESERVATION add constraint RESERVATION_PACK_ID_FK 
-    FOREIGN key(PACK_ID) References PACKAGES(ID) on delete set null;   
+    FOREIGN key(PACK_ID) References PACKAGE(ID) on delete set null;   
+ALTER TABLE RESERVATION MODIFY RDATE DEFAULT SYSDATE;    
        
 CREATE SEQUENCE RESERVATION_SEQ
 START WITH 1
@@ -97,12 +100,13 @@ CREATE TABLE REVIEW(
     RESERV_ID VARCHAR2(30), --FK
     GUIDE_REVIEW NUMBER(2) NOT NULL,
     SCHE_REVIEW NUMBER(2) NOT NULL,
-    AVG_REVIEW NUMBER(2, 1)
+    AVG_REVIEW NUMBER(3, 1)
 );
 Alter table REVIEW add constraint REVIEW_NO_PK primary key(NO);
 Alter table REVIEW add constraint REVIEW_RESERV_ID_FK 
     FOREIGN key(RESERV_ID) References RESERVATION(ID) on delete set null;
-      
+  
+--  drop sequence review_seq;    
 CREATE SEQUENCE REVIEW_SEQ
 START WITH 1
 INCREMENT BY 1;
@@ -110,7 +114,7 @@ INCREMENT BY 1;
 COMMIT;
 
 
-=============================================================================================
+--=============================================================================================
 -- 리뷰의 평균값 구하는 트리거
 CREATE OR REPLACE TRIGGER REVIEW_TRIGGER
 BEFORE INSERT OR UPDATE ON REVIEW

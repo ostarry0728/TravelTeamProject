@@ -2,6 +2,7 @@ package com.kh.travelMVCProject.controller;
 
 import java.util.ArrayList;
 
+import com.kh.travelMVCProject.model.CustomerVO;
 import com.kh.travelMVCProject.model.GuideVO;
 
 import java.sql.Connection;
@@ -17,7 +18,7 @@ public class GuideDAO {
 	public final String GUIDE_SELECT = "SELECT * FROM GUIDE";
 	public final String GUIDE_DELETE = "DELETE FROM GUIDE WHERE NO = ?";
 	public final String GUIDE_UPDATE = "UPDATE GUIDE SET NAME = ?, PHONE = ?, LANGUAGES = ? WHERE NO = ?";
-	public final String GUIDE_SORT = "SELECT * FROM GUIDE ORDER BY ID";
+	public final String GUIDE_SORT = "SELECT * FROM GUIDE ORDER BY NO";
 
 	// insert
 	public boolean guideInsert(GuideVO gvo) {
@@ -33,6 +34,7 @@ public class GuideDAO {
 			pstmt.setString(4, gvo.getLanguages());
 			int result = pstmt.executeUpdate();
 			successFlag = (result != 0) ? true : false;
+			printSingleGuide(gvo);
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 		} finally {
@@ -134,5 +136,23 @@ public class GuideDAO {
 			DBUtility.dbClose(con, pstmt, rs);
 		}
 		return guideList;
+	}
+
+	
+	private void printSingleGuide(GuideVO gvo) {
+		System.out.println();
+	    // 헤더 출력
+	    System.out.printf(
+	    	    "%-8s %-12s %-14s %-13s %-10s\n",
+	    	    "가이드No", "가이드ID", "이름", "전화번호", "가능언어"
+	    );
+	    System.out.println("-----------------------------------------------------------------");
+
+	    // 삽입된 고객 데이터 출력
+	    System.out.printf(
+	    		"%-8s %-12s %-14s %-13s %-10s\n",
+	        gvo.getNo(), gvo.getId(), gvo.getName(), gvo.getPhone(), gvo.getLanguages()
+	    );
+	    System.out.println();
 	}
 }

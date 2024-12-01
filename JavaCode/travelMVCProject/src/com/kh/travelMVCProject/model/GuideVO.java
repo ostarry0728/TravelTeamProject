@@ -61,7 +61,10 @@ public class GuideVO {
 
 	@Override
 	public String toString() {
-		return "GuideVO [no=" + no + ", id=" + id + ", name=" + name + ", phone=" + phone + ", languages=" + languages
-				+ "]";
+	    return String.format(
+	        "%-10d %-15s %-15s %-15s %-20s",
+	        no, id, name, phone, languages
+	    );
 	}
+
 }

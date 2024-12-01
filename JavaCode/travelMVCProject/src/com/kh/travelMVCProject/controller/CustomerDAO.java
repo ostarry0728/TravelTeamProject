@@ -102,33 +102,50 @@ public class CustomerDAO {
 		return successFlag;
 	}
 
-	// Lesson 테이블에서 insert 레코드를 삽입한다. (insert)
-	public boolean customerInsert(CustomerVO cvo) {
-		Connection con = null; // 오라클접속관문
-		PreparedStatement pstmt = null; // 오라클에서 작업할 쿼리문 사용할게 하는 명령문
-		boolean successFlag = false;
+    // Lesson 테이블에서 insert 레코드를 삽입한다. (Insert)
+    public boolean customerInsert(CustomerVO cvo) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean successFlag = false;
 
-		try {
-			con = DBUtility.dbCon();
-			System.out.println("cvo "+ cvo.toString());
-			pstmt = con.prepareStatement(CUSTOMER_INSERT);
-			pstmt.setString(1, cvo.getId());
-			pstmt.setString(2, cvo.getName());
-			pstmt.setInt(3, cvo.getBirth());
-			pstmt.setString(4, cvo.getNational());
-			pstmt.setString(5, cvo.getGender());
-			pstmt.setString(6, cvo.getEmail());
-			pstmt.setString(7, cvo.getPhone());
+        try {
+            con = DBUtility.dbCon();
+            pstmt = con.prepareStatement(CUSTOMER_INSERT);
+            pstmt.setString(1, cvo.getId());
+            pstmt.setString(2, cvo.getName());
+            pstmt.setInt(3, cvo.getBirth());
+            pstmt.setString(4, cvo.getNational());
+            pstmt.setString(5, cvo.getGender());
+            pstmt.setString(6, cvo.getEmail());
+            pstmt.setString(7, cvo.getPhone());
 
-			int count = pstmt.executeUpdate();
-			successFlag = (count != 0) ? (true) : (false);
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		} finally {
-			DBUtility.dbClose(con, pstmt);
-		}
-		return successFlag;
-	}
+            int count = pstmt.executeUpdate();
+            successFlag = (count != 0);
+
+            if (successFlag) {
+                // 방금 삽입된 NO 값을 가져오기
+                pstmt = con.prepareStatement("SELECT CUSTOMER_SEQ.CURRVAL FROM DUAL");
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    cvo.setNo(rs.getInt(1)); // NO 값을 cvo에 설정
+                }
+
+                System.out.println("\n고객 정보가 성공적으로 삽입되었습니다.\n");
+                printSingleCustomer(cvo); // 삽입한 고객 정보만 출력
+            } else {
+                System.out.println("\n고객 정보 삽입에 실패했습니다.\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } finally {
+            DBUtility.dbClose(con, pstmt, rs);
+        }
+        return successFlag;
+    }
+
+
+
 
 	// Lesson 테이블에서 select 출력레코드를 리턴한다. (Read)
 	public ArrayList<CustomerVO> customerSelectSort(CustomerVO cvo) {
@@ -160,6 +177,23 @@ public class CustomerDAO {
 		}
 
 		return customerList;
+	}
+
+	private void printSingleCustomer(CustomerVO cvo) {
+	    // 헤더 출력
+	    System.out.printf(
+	        "%-9s %-15s %-15s %-13s %-10s %-8s %-24s %-13s\n",
+	        "고객No", "고객ID", "이름", "생년월일", "국적", "성별", "이메일", "전화번호"
+	    );
+	    System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+
+	    // 삽입된 고객 데이터 출력
+	    System.out.printf(
+	        "%-9d %-15s %-15s %-13d %-10s %-8s %-24s %-13s\n",
+	        cvo.getNo(), cvo.getId(), cvo.getName(), cvo.getBirth(),
+	        cvo.getNational(), cvo.getGender(), cvo.getEmail(), cvo.getPhone()
+	    );
+	    System.out.println();
 	}
 
 	

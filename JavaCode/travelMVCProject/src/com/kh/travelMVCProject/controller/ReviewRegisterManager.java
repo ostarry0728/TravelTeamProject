@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.kh.travelMVCProject.model.PackageVO;
 import com.kh.travelMVCProject.model.ReservationVO;
 import com.kh.travelMVCProject.model.ReviewVO;
 
@@ -96,26 +97,23 @@ public class ReviewRegisterManager {
 	    ReviewDAO reviewDAO = new ReviewDAO();
 	    ReservationDAO reservationDAO = new ReservationDAO();
 
+	    
 	    // 예약 리스트 출력
 	    ArrayList<ReservationVO> reservationList = reservationDAO.reservationSelect();
 	    if (reservationList == null || reservationList.isEmpty()) {
 	        System.out.println("예약 데이터가 없습니다.");
 	        return;
 	    }
-
-	    System.out.println("예약 전체 리스트:");
-	    for (ReservationVO rvo : reservationList) {
-	        System.out.println(rvo);
-	    }
+	    printReservationList(reservationList);
 
 	    // 예약 ID 입력받기
-	    System.out.println("리뷰를 남길 예약 ID를 입력하세요: ");
+	    System.out.print("리뷰를 남길 예약 ID를 입력하세요 >> ");
 	    String reservId = sc.nextLine();
 
-	    System.out.print("가이드에 대한 점수를 매겨주세요(1~10): ");
+	    System.out.print("가이드에 대한 점수를 매겨주세요(1~10) >> ");
 	    int guideReview = Integer.parseInt(sc.nextLine());
 
-	    System.out.print("여행일정에 대한 점수를 매겨주세요(1~10): ");
+	    System.out.print("여행일정에 대한 점수를 매겨주세요(1~10) >> ");
 	    int scheReview = Integer.parseInt(sc.nextLine());
 
 	    // ReviewVO 생성 및 데이터 삽입
@@ -156,18 +154,22 @@ public class ReviewRegisterManager {
 	
 	// update 
 	public void updateManager() {
-		System.out.println("수정할 리뷰의 리뷰번호를 입력하세요: ");
+		ReviewDAO reviewDAO = new ReviewDAO();
+	    ArrayList<ReviewVO> reviewList = reviewDAO.reviewSelect();
+	    if (reviewList == null || reviewList.isEmpty()) {
+	        System.out.println("예약 데이터가 없습니다.");
+	        return;
+	    }
+	    printReviewList(reviewList);
+		System.out.print("수정할 리뷰의 리뷰번호를 선택해주세요 >> ");
 		int no = Integer.parseInt(sc.nextLine());
 
-		System.out.print("수정할 가이드 평점을 입력하세요(1~10): ");
+		System.out.print("수정할 가이드 평점을 입력하세요(1~10) >> ");
 		int guideReview = Integer.parseInt(sc.nextLine());
 
-		System.out.print("수정할 여행일정에 대한 평점을 입력하세요(1~10): ");
+		System.out.print("수정할 여행일정에 대한 평점을 입력하세요(1~10) >> ");
 		int scheReview = Integer.parseInt(sc.nextLine());
 
-		// 수정할 리뷰 데이터를 가져오기 위해 RESERV_ID를 조회
-		ReviewDAO reviewDAO = new ReviewDAO();
-		ArrayList<ReviewVO> reviewList = reviewDAO.reviewSelect();
 
 		String reservId = null;
 		for (ReviewVO rvo : reviewList) {
@@ -182,7 +184,7 @@ public class ReviewRegisterManager {
 		    return;
 		}
 
-		System.out.println("수정된 데이터 리뷰번호: " + no + ", 가이드 평점: " + guideReview + ", 여행일정 평점: " + scheReview);
+//		System.out.println("수정된 데이터 리뷰번호: " + no + ", 가이드 평점: " + guideReview + ", 여행일정 평점: " + scheReview);
 
 		ReviewVO rvo = new ReviewVO();
 		rvo.setReservId(reservId);
@@ -201,12 +203,22 @@ public class ReviewRegisterManager {
 	
 	// delete
 	public void deleteManager() {
+		ReviewDAO reviewDAO = new ReviewDAO();
+	    ArrayList<ReviewVO> reviewList = reviewDAO.reviewSelect();
+	    if (reviewList == null || reviewList.isEmpty()) {
+	        System.out.println("예약 데이터가 없습니다.");
+	        return;
+	    }
+	    printReviewList(reviewList);
+	    
 		ReviewDAO rdao = new ReviewDAO();
-		System.out.print("삭제할 리뷰의 예약 id를 입력하세요: ");
-		String reservId = sc.nextLine();
+//		System.out.print("삭제할 리뷰의 예약 id를 입력하세요 >> ");
+//		String reservId = sc.nextLine();
+		System.out.print("삭제할 리뷰의 리뷰 NO를 입력하세요 >> ");
+		int no = Integer.parseInt(sc.nextLine());
 		
 		ReviewVO rvo = new ReviewVO();
-		rvo.setReservId(reservId);
+		rvo.setNo(no);
 		
 		boolean successFlag = rdao.reviewDelete(rvo);
 		
@@ -230,17 +242,49 @@ public class ReviewRegisterManager {
 	}
 
 	// arrayList
-	public void printReviewList(ArrayList<ReviewVO> reviewList) {
-		for(ReviewVO data : reviewList) {
-			System.out.println(data);
-		}
-		
+	private void printReviewList(ArrayList<ReviewVO> reviewList) {
+		System.out.println();
+	    // 헤더 출력
+	    System.out.printf(
+	        "%-9s %-14s %-9s %-8s %-10s\n",
+	        "리뷰No", "예약ID", "가이드리뷰", "일정리뷰", "평균리뷰"
+	    );
+	    System.out.println("--------------------------------------------------------------");
+
+	    // 데이터 출력 (toString 사용)
+	    for (ReviewVO review : reviewList) {
+	        System.out.printf(
+	            "%-10d %-15s %-10d %-10d %-10.2f\n",
+	            review.getNo(), review.getReservId(), review.getGuideReview(),
+	            review.getScheReview(), review.getAvgReview()
+	        );
+	    }
+	    System.out.println();
 	}
+
+
 	
-	// arrayList
-	public  void printReservationList(ArrayList<ReservationVO> reservationList) {
-		for(ReservationVO data : reservationList) {
-			System.out.println(data);
-		}
+//	// arrayList
+//	public  void printReservationList(ArrayList<ReservationVO> reservationList) {
+//		for(ReservationVO data : reservationList) {
+//			System.out.println(data);
+//		}
+//	}
+	public void printReservationList(ArrayList<ReservationVO> reservationList) {
+	    // 헤더 출력
+	    System.out.printf(
+	        "%-10s %-15s %-15s %-15s %-15s %-15s\n",
+	        "예약No", "예약ID", "고객ID", "패키지ID", "결제방법", "예약날짜"
+	    );
+	    System.out.println("---------------------------------------------------------------------------------------------");
+
+	    // 데이터 출력 (toString 사용)
+	    for (ReservationVO data : reservationList) {
+	        System.out.println(data.toString());
+	    }
+	    System.out.println();
 	}
+
+	
+	
 }
