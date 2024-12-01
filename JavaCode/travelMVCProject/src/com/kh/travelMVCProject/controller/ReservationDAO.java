@@ -13,14 +13,19 @@ import com.kh.travelMVCProject.model.ReservationVO;
 public class ReservationDAO {
 
 	public final String RESERVATION_SELECT = "SELECT * FROM RESERVATION";
-	public final String RESERVATION_CUSTOMER_PACKAGE_SELECT_JOIN = "SELECT RES.NO, RES.ID, RES.CUST_ID, CUST.NAME AS CUSTOMER_NAME, CUST.EMAIL AS CUSTOMER_EMAIL, "
-			+ "RES.PACK_ID, PKG.NAME AS PACKAGE_NAME, PKG.NATIONAL AS PACKAGE_NATIONAL, "
-			+ "RES.RCAPACITY, RES.METHOD, RES.RDATE " + "FROM RESERVATION RES "
-			+ "INNER JOIN CUSTOMER CUST ON RES.CUST_ID = CUST.ID " + "INNER JOIN PACKAGE PKG ON RES.PACK_ID = PKG.ID";
-	public final String RESERVATION_SELECT_SORT = "SELECT * FROM RESERVATION ORDER BY RDATE";
+//	public final String RESERVATION_CUSTOMER_PACKAGE_SELECT_JOIN = "SELECT RES.NO, RES.ID, RES.CUST_ID, CUST.NAME AS CUSTOMER_NAME, CUST.EMAIL AS CUSTOMER_EMAIL, "
+//			+ "RES.PACK_ID, PKG.NAME AS PACKAGE_NAME, PKG.NATIONAL AS PACKAGE_NATIONAL, "
+//			+ "RES.RCAPACITY, RES.METHOD, RES.RDATE " + "FROM RESERVATION RES "
+//			+ "INNER JOIN CUSTOMER CUST ON RES.CUST_ID = CUST.ID " + "INNER JOIN PACKAGE PKG ON RES.PACK_ID = PKG.ID";
+	public final String RESERVATION_SELECT_SORT = "SELECT * FROM RESERVATION ORDER BY NO";
 	public final String RESERVATION_DELETE = "DELETE FROM RESERVATION WHERE NO = ?";
-	public final String RESERVATION_UPDATE = "UPDATE RESERVATION SET CUST_ID = ?, PACK_ID = ?, RCAPACITY = ?, METHOD = ?, RDATE = ? WHERE NO = ?";
-	public final String RESERVATION_INSERT = "INSERT INTO RESERVATION (NO, ID, CUST_ID, PACK_ID, RCAPACITY, METHOD, RDATE) VALUES (RESERVATION_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+	public final String RESERVATION_UPDATE = 
+		    "UPDATE RESERVATION SET ID = ?, CUST_ID = ?, PACK_ID = ?, METHOD = ? WHERE NO = ?";
+
+	public final String RESERVATION_INSERT = 
+		    "INSERT INTO RESERVATION (NO, ID, CUST_ID, PACK_ID, METHOD, RDATE) VALUES (RESERVATION_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+
+
 
 	// 예약 정보를 조회
 	public ArrayList<ReservationVO> reservationSelect() {
@@ -39,11 +44,12 @@ public class ReservationDAO {
 				String id = rs.getString("ID");
 				String custID = rs.getString("CUST_ID");
 				String packID = rs.getString("PACK_ID");
-				int rCapacity = rs.getInt("RCAPACITY");
+//				int rCapacity = rs.getInt("RCAPACITY");
 				String method = rs.getString("METHOD");
 				Date rDate = rs.getDate("RDATE");
 
-				ReservationVO reserv = new ReservationVO(no, id, custID, packID, rCapacity, method, rDate);
+//				ReservationVO reserv = new ReservationVO(no, id, custID, packID, rCapacity, method, rDate);
+				ReservationVO reserv = new ReservationVO(no, id, custID, packID, method, rDate);
 				reservationList.add(reserv);
 			}
 		} catch (SQLException e) {
@@ -72,11 +78,12 @@ public class ReservationDAO {
 				String id = rs.getString("ID");
 				String custID = rs.getString("CUST_ID");
 				String packID = rs.getString("PACK_ID");
-				int rCapacity = rs.getInt("RCAPACITY");
+//				int rCapacity = rs.getInt("RCAPACITY");
 				String method = rs.getString("METHOD");
 				Date rDate = rs.getDate("RDATE");
 
-				ReservationVO reserv = new ReservationVO(no, id, custID, packID, rCapacity, method, rDate);
+//				ReservationVO reserv = new ReservationVO(no, id, custID, packID, rCapacity, method, rDate);
+				ReservationVO reserv = new ReservationVO(no, id, custID, packID, method, rDate);
 				reservationList.add(reserv);
 			}
 		} catch (SQLException e) {
@@ -119,94 +126,99 @@ public class ReservationDAO {
 
 	// 예약 정보를 수정
 	public boolean reservationUpdate(ReservationVO rvo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		boolean successFlag = false;
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    boolean successFlag = false;
 
-		try {
-			con = DBUtility.dbCon();
-			pstmt = con.prepareStatement(RESERVATION_UPDATE);
-			pstmt.setString(1, rvo.getCustID());
-			pstmt.setString(2, rvo.getPackID());
-			pstmt.setInt(3, rvo.getrCapacity());
-			pstmt.setString(4, rvo.getMethod());
-			pstmt.setDate(5, rvo.getrDate());
-			pstmt.setInt(6, rvo.getNo());
+	    try {
+	        con = DBUtility.dbCon();
+	        pstmt = con.prepareStatement(RESERVATION_UPDATE);
+	        pstmt.setString(1, rvo.getID());
+	        pstmt.setString(2, rvo.getCustID());
+	        pstmt.setString(3, rvo.getPackID());
+//	        pstmt.setInt(3, rvo.getrCapacity());
+	        pstmt.setString(4, rvo.getMethod());
+	        pstmt.setInt(5, rvo.getNo());
 
-			int count = pstmt.executeUpdate();
-			successFlag = (count != 0);
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		} finally {
-			DBUtility.dbClose(con, pstmt);
-		}
+	        int count = pstmt.executeUpdate();
+	        successFlag = (count != 0);
+	    } catch (SQLException e) {
+	        System.out.println(e.toString());
+	    } finally {
+	        DBUtility.dbClose(con, pstmt);
+	    }
 
-		return successFlag;
+	    return successFlag;
 	}
+
 
 	// 예약 정보를 추가
 	public boolean reservationInsert(ReservationVO rvo) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		boolean successFlag = false;
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    boolean successFlag = false;
 
-		try {
-			con = DBUtility.dbCon();
-			pstmt = con.prepareStatement(RESERVATION_INSERT);
-			pstmt.setString(1, rvo.getID()); // ID 추가
-			pstmt.setString(2, rvo.getCustID());
-			pstmt.setString(3, rvo.getPackID());
-			pstmt.setInt(4, rvo.getrCapacity());
-			pstmt.setString(5, rvo.getMethod());
-			pstmt.setDate(6, rvo.getrDate());
+	    try {
+	        con = DBUtility.dbCon();
+	        pstmt = con.prepareStatement(RESERVATION_INSERT);
 
-			int count = pstmt.executeUpdate();
-			successFlag = (count != 0);
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		} finally {
-			DBUtility.dbClose(con, pstmt);
-		}
-		return successFlag;
+	        pstmt.setString(1, rvo.getID());
+	        pstmt.setString(2, rvo.getCustID());
+	        pstmt.setString(3, rvo.getPackID());
+	        pstmt.setString(4, rvo.getMethod()); // RDATE는 자동 처리
+
+	        int count = pstmt.executeUpdate();
+	        successFlag = (count != 0);
+	    } catch (SQLException e) {
+	        System.out.println(e.toString());
+	    } finally {
+	        DBUtility.dbClose(con, pstmt);
+	    }
+	    return successFlag;
 	}
 
-	// 고객 및 패키지 정보를 포함한 예약 정보 조회
-	public ArrayList<ReservationAllVO> reservationAllSelect() {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<ReservationAllVO> reservationList = new ArrayList<>();
-		con = DBUtility.dbCon();
 
-		try {
-			pstmt = con.prepareStatement(RESERVATION_CUSTOMER_PACKAGE_SELECT_JOIN);
-			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				int no = rs.getInt("NO");
-				String id = rs.getString("ID");
-				String custID = rs.getString("CUST_ID");
-				String customerName = rs.getString("CUSTOMER_NAME");
-				String customerEmail = rs.getString("CUSTOMER_EMAIL");
-				String packID = rs.getString("PACK_ID");
-				String packageName = rs.getString("PACKAGE_NAME");
-				String packageNational = rs.getString("PACKAGE_NATIONAL");
-				int rCapacity = rs.getInt("RCAPACITY");
-				String method = rs.getString("METHOD");
-				Date rDate = rs.getDate("RDATE");
 
-				// JOIN 데이터를 포함한 ReservationsVO 생성
-				ReservationAllVO reserAv = new ReservationAllVO(no, id, custID, customerName, customerEmail, packID,
-						packageName, packageNational, rCapacity, method, rDate);
-				reservationList.add(reserAv);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.toString());
-		} finally {
-			DBUtility.dbClose(con, pstmt, rs);
-		}
-
-		return reservationList;
-	}
+	
+	
+//	// 고객 및 패키지 정보를 포함한 예약 정보 조회
+//	public ArrayList<ReservationAllVO> reservationAllSelect() {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		ArrayList<ReservationAllVO> reservationList = new ArrayList<>();
+//		con = DBUtility.dbCon();
+//
+//		try {
+//			pstmt = con.prepareStatement(RESERVATION_CUSTOMER_PACKAGE_SELECT_JOIN);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				int no = rs.getInt("NO");
+//				String id = rs.getString("ID");
+//				String custID = rs.getString("CUST_ID");
+//				String customerName = rs.getString("CUSTOMER_NAME");
+//				String customerEmail = rs.getString("CUSTOMER_EMAIL");
+//				String packID = rs.getString("PACK_ID");
+//				String packageName = rs.getString("PACKAGE_NAME");
+//				String packageNational = rs.getString("PACKAGE_NATIONAL");
+//				int rCapacity = rs.getInt("RCAPACITY");
+//				String method = rs.getString("METHOD");
+//				Date rDate = rs.getDate("RDATE");
+//
+//				// JOIN 데이터를 포함한 ReservationsVO 생성
+//				ReservationAllVO reserAv = new ReservationAllVO(no, id, custID, customerName, customerEmail, packID,
+//						packageName, packageNational, rCapacity, method, rDate);
+//				reservationList.add(reserAv);
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.toString());
+//		} finally {
+//			DBUtility.dbClose(con, pstmt, rs);
+//		}
+//
+//		return reservationList;
+//	}
 
 }

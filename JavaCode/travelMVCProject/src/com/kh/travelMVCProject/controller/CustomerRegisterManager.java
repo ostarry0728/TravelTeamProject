@@ -17,18 +17,19 @@ public class CustomerRegisterManager {
 	// 과목등록(insert)
 	public void insertManager() {
 		CustomerDAO cdao = new CustomerDAO();
+		System.out.println("고객 정보 입력");
 		String id = makeId();
-		System.out.print("이름 입력>>");
+		System.out.print("고객의 이름을 입력해주세요 >> ");
 		String name = (sc.nextLine()).trim();
-		System.out.print("생년월일 입력>>");
+		System.out.print("고객의 생년월일을 입력해주세요 (형식:20011217) >> ");
 		int birth = Integer.parseInt((sc.nextLine()).trim());
-		System.out.print("국적 입력>>");
+		System.out.print("고객의 국적을 입력해주세요 >> ");
 		String national = (sc.nextLine()).trim();
-		System.out.print("성별 입력>>");
+		System.out.print("고객의 성별을 입력해주세요 >> ");
 		String gender = (sc.nextLine()).trim();
-		System.out.print("이메일 입력 (xxxxx@xxxx.com) >>");
+		System.out.print("고객의 이메일을 입력해주세요 (형식:xxxxx@xxxx.com) >> ");
 		String email = (sc.nextLine()).trim();
-		System.out.print("전화번호 입력 (010-xxxx-xxxx) >>");
+		System.out.print("고객의 전화번호를 입력해주세요 (형식:010-xxxx-xxxx) >> ");
 		String phone = (sc.nextLine()).trim();
 
 		CustomerVO cvo = new CustomerVO(0, id, name, birth, national, gender, email, phone);
@@ -56,7 +57,7 @@ public class CustomerRegisterManager {
 			printCustomerList(customerList);
 
 		} else {
-			System.out.println("출력할 데이터가 없습니다.");
+			System.out.println("출력할 고객 데이터가 없습니다.");
 		}
 
 	}
@@ -65,15 +66,16 @@ public class CustomerRegisterManager {
 	public void deleteManager() {
 		CustomerDAO cdao = new CustomerDAO();
 		CustomerVO cvo = new CustomerVO();
+		
 		// 전체 리스트를 보여준다.
-
 		ArrayList<CustomerVO> customerList = cdao.customerSelect(cvo);
 		if (customerList.size() != 0) { // 값이 있으면
 			printCustomerList(customerList);
 		} else {
-			System.out.println("출력할 데이터가 없습니다.");
+			System.out.println("출력할 고객 데이터가 없습니다.");
 			return;
 		}
+		
 		// 화면으로부터 입력 받는다.
 		System.out.print("삭제할 번호>>");
 		int no = Integer.parseInt(sc.nextLine().trim()); // 정수형 변환
@@ -84,9 +86,9 @@ public class CustomerRegisterManager {
 
 		// 화면 출력
 		if (successFlag == true) {
-			System.out.println(no + "번호 고객 삭제 완료하였습니다.");
+			System.out.println(no + "번의 고객 정보를 삭제 완료하였습니다.");
 		} else {
-			System.out.println(no + "번호 고객 삭제 실패하였습니다.");
+			System.out.println(no + "번의 고객 정보를 삭제 실패하였습니다.");
 		}
 	}
 
@@ -95,6 +97,7 @@ public class CustomerRegisterManager {
 		CustomerDAO cdao = new CustomerDAO();
 		CustomerVO cvo = new CustomerVO();
 		// 수정하기 전체출력요청
+		
 		ArrayList<CustomerVO> customerList = cdao.customerSelect(cvo);
 		if (customerList.size() != 0) {
 			printCustomerList(customerList);
@@ -102,21 +105,21 @@ public class CustomerRegisterManager {
 			System.out.println("출력할 데이터가 없습니다");
 			return;
 		}
-		// 화면으로붕터 입력받는다
-		System.out.print("수정할 번호(no) 선택>>");
+		// 화면으로부터 입력받는다
+		System.out.print("수정할 고객 번호를(no) 선택해주세요 >> ");
 		int no = Integer.parseInt(sc.nextLine());
 		
-		System.out.print("이름 입력>>");
+		System.out.print("수정한 고객의 이름을 입력해주세요 >> ");
 		String name = (sc.nextLine()).trim();
-		System.out.print("생년월일 입력>>");
+		System.out.print("수정한 고객의 생년월일을 입력해주세요 (형식:20011217) >> ");
 		int birth = Integer.parseInt((sc.nextLine()).trim());
-		System.out.print("국적 입력>>");
+		System.out.print("수정한 고객의 국적을 입력해주세요 >> ");
 		String national = (sc.nextLine()).trim();
-		System.out.print("성별 입력>>");
+		System.out.print("수정한 고객의 성별을 입력해주세요 >> ");
 		String gender = (sc.nextLine()).trim();
-		System.out.print("이메일 입력 (xxxxx@xxxx.com) >>");
+		System.out.print("수정한 고객의 이메일을 입력해주세요 (형식:xxxxx@xxxx.com) >> ");
 		String email = (sc.nextLine()).trim();
-		System.out.print("전화번호 입력 (010-xxxx-xxxx) >>");
+		System.out.print("수정한 고객의 전화번호을 입력해주세요 (형식:010-xxxx-xxxx) >> ");
 		String phone = (sc.nextLine()).trim();
 
 		cvo = new CustomerVO(no, phone, name, birth, national, gender, email, phone);
@@ -124,9 +127,9 @@ public class CustomerRegisterManager {
 
 		// 화면 출력
 		if (successFlag == true) {
-			System.out.println(no + "님의 정보를 수정하였습니다.");
+			System.out.println(no + "번의 고객 정보를 수정 완료하였습니다.");
 		} else {
-			System.out.println(no + "님의 정보 수정을 실패하였습니다.");
+			System.out.println(no + "번의 고객 정보를 수정 실패하였습니다.");
 		}
 	}
 
@@ -143,16 +146,30 @@ public class CustomerRegisterManager {
 			printCustomerList(customerList);
 
 		} else {
-			System.out.println("출력할 데이터가 없습니다.");
+			System.out.println("출력할 고객 데이터가 없습니다.");
 		}
 	}
 
-	// 화면 출력
 	private void printCustomerList(ArrayList<CustomerVO> customerList) {
-		for (CustomerVO data : customerList) {
-			System.out.println(data);
-		}
+	    // 헤더 출력
+	    System.out.printf(
+	        "%-9s %-15s %-15s %-13s %-10s %-8s %-30s %-15s\n",
+	        "고객No", "고객ID", "이름", "생년월일", "국적", "성별", "이메일", "전화번호"
+	    );
+	    System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+
+	    // 데이터 출력
+	    for (CustomerVO data : customerList) {
+	        System.out.printf(
+	            "%-9d %-15s %-15s %-13d %-10s %-8s %-30s %-15s\n",
+	            data.getNo(), data.getId(), data.getName(), data.getBirth(),
+	            data.getNational(), data.getGender(), data.getEmail(), data.getPhone()
+	        );
+	    }
+	    System.out.println();
 	}
+
+
 
 	// 랜덤ID생성
 	public static String makeId() {

@@ -1,5 +1,7 @@
 package com.kh.travelMVCProject.model;
 
+import java.util.ArrayList;
+
 public class CustomerVO {
 	private int no; // pk
 	private String id;
@@ -93,8 +95,16 @@ public class CustomerVO {
 
 	@Override
 	public String toString() {
-		return "CustomerVO [no=" + no + ", id=" + id + ", name=" + name + ", birth=" + birth + ", national=" + national
-				+ ", gender=" + gender + ", email=" + email + ", phone=" + phone + "]";
+	    return String.format(
+	        "%-9s %-15s %-15s %-13s %-10s %-8s %-30s %-15s",
+	        no, id, name, birth, national, gender, email, phone
+	    );
 	}
+
+
+
+
+
+
 
 }

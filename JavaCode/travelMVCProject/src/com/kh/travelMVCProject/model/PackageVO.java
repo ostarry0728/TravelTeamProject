@@ -16,7 +16,7 @@ public class PackageVO {
 	private int no;
 	private String id;
 	private String name;
-	private int pCapacity;
+//	private int pCapacity;
 	private String national;
 	private int price;
 	private String guideId;
@@ -27,41 +27,73 @@ public class PackageVO {
 		super();
 	}
 	
+//	// guideId, id, name, pCapacity, national, sDate, eDate
+//	public PackageVO(String name, int pCapacity, String national, int price, String guideId, Date sDate, Date eDate) {
+//		super();
+//		this.name = name;
+//		this.pCapacity = pCapacity;
+//		this.national = national;
+//		this.price = price;
+//		this.guideId = guideId;
+//		this.sDate = sDate;
+//		this.eDate = eDate;
+//	}
+//	public PackageVO(String id, String name, int pCapacity, String national, int price, String guideId, Date sDate, Date eDate) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.pCapacity = pCapacity;
+//		this.national = national;
+//		this.price = price;
+//		this.guideId = guideId;
+//		this.sDate = sDate;
+//		this.eDate = eDate;
+//	}
+//	public PackageVO(int no, String id, String name, int pCapacity, String national, int price, String guideId, Date sDate,
+//			Date eDate) {
+//		super();
+//		this.no = no;
+//		this.id = id;
+//		this.name = name;
+//		this.pCapacity = pCapacity;
+//		this.national = national;
+//		this.price = price;
+//		this.guideId = guideId;
+//		this.sDate = sDate;
+//		this.eDate = eDate;
+//	}
 	// guideId, id, name, pCapacity, national, sDate, eDate
-	public PackageVO(String name, int pCapacity, String national, int price, String guideId, Date sDate, Date eDate) {
-		super();
-		this.name = name;
-		this.pCapacity = pCapacity;
-		this.national = national;
-		this.price = price;
-		this.guideId = guideId;
-		this.sDate = sDate;
-		this.eDate = eDate;
-	}
-	public PackageVO(String id, String name, int pCapacity, String national, int price, String guideId, Date sDate, Date eDate) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.pCapacity = pCapacity;
-		this.national = national;
-		this.price = price;
-		this.guideId = guideId;
-		this.sDate = sDate;
-		this.eDate = eDate;
-	}
-	public PackageVO(int no, String id, String name, int pCapacity, String national, int price, String guideId, Date sDate,
-			Date eDate) {
-		super();
-		this.no = no;
-		this.id = id;
-		this.name = name;
-		this.pCapacity = pCapacity;
-		this.national = national;
-		this.price = price;
-		this.guideId = guideId;
-		this.sDate = sDate;
-		this.eDate = eDate;
-	}
+		public PackageVO(String name, String national, int price, String guideId, Date sDate, Date eDate) {
+			super();
+			this.name = name;
+			this.national = national;
+			this.price = price;
+			this.guideId = guideId;
+			this.sDate = sDate;
+			this.eDate = eDate;
+		}
+		public PackageVO(String id, String name, String national, int price, String guideId, Date sDate, Date eDate) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.national = national;
+			this.price = price;
+			this.guideId = guideId;
+			this.sDate = sDate;
+			this.eDate = eDate;
+		}
+		public PackageVO(int no, String id, String name, String national, int price, String guideId, Date sDate,
+				Date eDate) {
+			super();
+			this.no = no;
+			this.id = id;
+			this.name = name;
+			this.national = national;
+			this.price = price;
+			this.guideId = guideId;
+			this.sDate = sDate;
+			this.eDate = eDate;
+		}
 
 	public int getNo() {
 		return no;
@@ -81,12 +113,12 @@ public class PackageVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPCapacity() {
-		return pCapacity;
-	}
-	public void setPCapacity(int pCapacity) {
-		this.pCapacity = pCapacity;
-	}
+//	public int getPCapacity() {
+//		return pCapacity;
+//	}
+//	public void setPCapacity(int pCapacity) {
+//		this.pCapacity = pCapacity;
+//	}
 	public String getNational() {
 		return national;
 	}
@@ -118,12 +150,23 @@ public class PackageVO {
 		this.eDate = eDate;
 	}
 
+//	@Override
+//	public String toString() {
+//	    return String.format(
+//	        "%-10d %-15s %-20s %-10d %-15s %-15d %-15s %-15s %-15s",
+//	        no, id, name, pCapacity, national, price, guideId, sDate, eDate
+//	    );
+//	}
 	@Override
 	public String toString() {
-		return "PackageVO [no=" + no + ", id=" + id + ", name=" + name + ", pCapacity=" + pCapacity + ", national="
-				+ national + ", price=" + price + ", guideId=" + guideId + ", sDate=" + sDate + ", eDate=" + eDate
-				+ "]";
+	    return String.format(
+	        "%-10d %-15s %-15s %-15s %-10d %-15s %-15s %-15s",
+	        no, id, name, national, price, guideId, sDate, eDate
+	    );
 	}
+
+
+
 	
 	
 }

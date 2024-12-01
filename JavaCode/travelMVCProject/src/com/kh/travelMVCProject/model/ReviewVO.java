@@ -68,7 +68,10 @@ public class ReviewVO {
 
 	@Override
 	public String toString() {
-		return "리뷰 정보 [ 리뷰no = " + no + ", 예약id=" + reservId + ", 가이드리뷰=" + guideReview + ", scheReview="
-				+ scheReview + ", avgReview=" + avgReview + "]";
+	    return String.format(
+	        "%-10d %-15s %-15s %-15s %-15.2f",
+	        no, reservId, guideReview, scheReview, avgReview
+	    );
 	}
+
 }

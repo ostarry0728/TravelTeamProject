@@ -7,7 +7,7 @@ public class ReservationVO {
 	private String ID; // --UK
 	private String custID; // --FK
 	private String packID; // --FK
-	private int rCapacity;
+//	private int rCapacity;
 	private String method;
 	private Date rDate;
 
@@ -15,13 +15,22 @@ public class ReservationVO {
 		super();
 	}
 
-	public ReservationVO(int no, String iD, String custID, String packID, int rCapacity, String method, Date rDate) {
+//	public ReservationVO(int no, String iD, String custID, String packID, int rCapacity, String method, Date rDate) {
+//		super();
+//		this.no = no;
+//		ID = iD;
+//		this.custID = custID;
+//		this.packID = packID;
+//		this.rCapacity = rCapacity;
+//		this.method = method;
+//		this.rDate = rDate;
+//	}
+	public ReservationVO(int no, String iD, String custID, String packID, String method, Date rDate) {
 		super();
 		this.no = no;
 		ID = iD;
 		this.custID = custID;
 		this.packID = packID;
-		this.rCapacity = rCapacity;
 		this.method = method;
 		this.rDate = rDate;
 	}
@@ -58,13 +67,13 @@ public class ReservationVO {
 		this.packID = packID;
 	}
 
-	public int getrCapacity() {
-		return rCapacity;
-	}
-
-	public void setrCapacity(int rCapacity) {
-		this.rCapacity = rCapacity;
-	}
+//	public int getrCapacity() {
+//		return rCapacity;
+//	}
+//
+//	public void setrCapacity(int rCapacity) {
+//		this.rCapacity = rCapacity;
+//	}
 
 	public String getMethod() {
 		return method;
@@ -82,10 +91,20 @@ public class ReservationVO {
 		this.rDate = rDate;
 	}
 
+//	@Override
+//	public String toString() {
+//	    return String.format(
+//	        "%-10d %-15s %-15s %-15s %-10d %-15s",
+//	        no, ID, custID, packID, rCapacity, method, rDate
+//	    );
+//	}
 	@Override
 	public String toString() {
-		return "[no=" + no + ", ID=" + ID + ", custID=" + custID + ", packID=" + packID + ", rCapacity=" + rCapacity
-				+ ", method=" + method + ", rDate=" + rDate + "]";
+	    return String.format(
+	        "%-10d %-15s %-15s %-15s%-15s",
+	        no, ID, custID, packID, method, rDate
+	    );
 	}
+
 
 }

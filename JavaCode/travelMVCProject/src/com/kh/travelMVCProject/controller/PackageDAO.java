@@ -26,9 +26,11 @@ public class PackageDAO {
 	// query 
 	public final String PACKAGE_SELECT = "SELECT * FROM PACKAGE";
 	public final String PACKAGE_INSERT = 
-		    "INSERT INTO PACKAGE (NO, ID, NAME, PCAPACITY, NATIONAL, PRICE, GUIDE_ID, SDATE, EDATE) " +
-		    "VALUES (PACKAGE_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
-	public final static String PACKAGE_UPDATE = "UPDATE PACKAGE SET NAME = ?, PCAPACITY = ?, NATIONAL = ? , PRICE = ?, SDATE = ?, EDATE = ? WHERE PACKAGE_ID = ?";
+		    "INSERT INTO PACKAGE (NO, ID, NAME, NATIONAL, PRICE, GUIDE_ID, SDATE, EDATE) " +
+		    "VALUES (PACKAGE_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+	public final static String PACKAGE_UPDATE = 
+		    "UPDATE PACKAGE SET NAME = ?, NATIONAL = ?, PRICE = ?, SDATE = ?, EDATE = ? WHERE NO = ?";
+
 	public final String PACKAGE_DELETE = "DELETE FROM PACKAGE WHERE NO = ?";
 	public final String PACKAGE_SORT = "SELECT * FROM PACKAGE ORDER BY PRICE DESC";
 	
@@ -52,14 +54,15 @@ public class PackageDAO {
 					int no = rs.getInt("NO");
 					String id = rs.getString("ID");
 					String name = rs.getString("NAME");
-					int pCapacity = rs.getInt("PCAPACITY");
+//					int pCapacity = rs.getInt("PCAPACITY");
 					String national = rs.getString("NATIONAL");
 					int price = rs.getInt("PRICE");
 					String guideId = rs.getString("GUIDE_ID");
 					Date sDate = rs.getDate("SDATE");
 					Date eDate = rs.getDate("EDATE");
 					
-					PackageVO pvo = new PackageVO(no, id, name, pCapacity, national, price, guideId, sDate, eDate);
+//					PackageVO pvo = new PackageVO(no, id, name, pCapacity, national, price, guideId, sDate, eDate);
+					PackageVO pvo = new PackageVO(no, id, name, national, price, guideId, sDate, eDate);
 					packageList.add(pvo);
 				} while(rs.next());
 			}else {
@@ -139,12 +142,12 @@ public class PackageDAO {
 
 	        pstmt.setString(1, pvo.getId());
 	        pstmt.setString(2, pvo.getName());
-	        pstmt.setInt(3, pvo.getPCapacity());
-	        pstmt.setString(4, pvo.getNational());
-	        pstmt.setInt(5, pvo.getPrice());
-	        pstmt.setString(6, pvo.getGuideId());
-	        pstmt.setDate(7, pvo.getSDate());
-	        pstmt.setDate(8, pvo.getEDate());
+//	        pstmt.setInt(3, pvo.getPCapacity());
+	        pstmt.setString(3, pvo.getNational());
+	        pstmt.setInt(4, pvo.getPrice());
+	        pstmt.setString(5, pvo.getGuideId());
+	        pstmt.setDate(6, pvo.getSDate());
+	        pstmt.setDate(7, pvo.getEDate());
 
 	        // 실행
 	        int result = pstmt.executeUpdate();
@@ -179,17 +182,17 @@ public class PackageDAO {
 	    PreparedStatement pstmt = null;
 	    
 	    try {
-	    	con = DBUtility.dbCon();
-	    	con.setAutoCommit(false);
-	    	pstmt = con.prepareStatement(PACKAGE_UPDATE);
-	    	
-	    	pstmt.setString(1, pvo.getName());
-	    	pstmt.setInt(2, pvo.getPCapacity());
-	    	pstmt.setString(3, pvo.getNational());
-	    	pstmt.setInt(4, pvo.getPrice());
-	    	pstmt.setDate(5, pvo.getSDate());
-	    	pstmt.setDate(6, pvo.getEDate());
-	    	
+	        con = DBUtility.dbCon();
+	        con.setAutoCommit(false);
+	        pstmt = con.prepareStatement(PACKAGE_UPDATE);
+	        
+	        pstmt.setString(1, pvo.getName());
+	        pstmt.setString(2, pvo.getNational());
+	        pstmt.setInt(3, pvo.getPrice());
+	        pstmt.setDate(4, pvo.getSDate());
+	        pstmt.setDate(5, pvo.getEDate());
+	        pstmt.setInt(6, pvo.getNo()); // 6번째 매개변수 바인딩
+
 	        int result = pstmt.executeUpdate();
 	        if (result > 0) {
 	            con.commit(); // 변경 사항 커밋
@@ -206,11 +209,12 @@ public class PackageDAO {
 	            rollbackEx.printStackTrace();
 	        }
 	    } finally {
-	    	DBUtility.dbClose(con, pstmt);
+	        DBUtility.dbClose(con, pstmt);
 	    }
 	    
 	    return successFlag;
 	}
+
 	
 	
 	
@@ -258,14 +262,15 @@ public class PackageDAO {
 				int no = rs.getInt("NO");
 				String id = rs.getString("ID");
 				String name = rs.getString("NAME");
-				int pCapacity = rs.getInt("PCAPACITY");
+//				int pCapacity = rs.getInt("PCAPACITY");
 				String national = rs.getString("NATIONAL");
 				int price = rs.getInt("PRICE");
 				String guideId = rs.getString("GUIDE_ID");
 				Date sDate = rs.getDate("SDATE");
 				Date eDate = rs.getDate("EDATE");
 			
-				PackageVO pvo = new PackageVO(no, id, name, pCapacity, national, price, guideId, sDate, eDate);
+//				PackageVO pvo = new PackageVO(no, id, name, pCapacity, national, price, guideId, sDate, eDate);
+				PackageVO pvo = new PackageVO(no, id, name, national, price, guideId, sDate, eDate);
 				packageList.add(pvo);
 			}
 		} catch (SQLException e) {
