@@ -9,11 +9,11 @@
 <br>
 
 ## ⚙Tech Stack
-<p><strong> Window <br></strong>
+<p><strong> Window: Windows11 <br></strong>
 <br>
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white">
 </p>
-<p><strong> Database <br></strong>
+<p><strong> Database: Oracle 21c <br></strong>
 <br>
 <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=Oracle&logoColor=white">
 </p>
@@ -21,7 +21,7 @@
 <br>
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"> 
 </p>
-<p><strong> Software <br></strong>
+<p><strong> Software: 2024-09, jdk17.0.12 <br></strong>
 <br>
 <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
 </p>
