@@ -4,10 +4,25 @@
 - 프로젝트 설명: 여행사 고객, 상품, 가이드, 리뷰 등등의 데이터를 관리하는 시스템으로 설계했습니다.<br>
    시스템 내에서 데이터를 조회, 입력, 수정, 삭제(CURD) 할 수 있게 기능을 구현한 미니 프로젝트입니다.
 
+# 2. Technology Stack (기술 스택)
+
+## 2.1 Language
+
+|             |                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------------- |
+| ORACLE SQL Developer 21c | <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">   |
+| JAVA JDK 21 | <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">       |
+| Eclipse IDE | <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse logoColor=white"> |
+
+## 2.2 Collaboration Tool
+
+|        |                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------- |
+| GITHUB | <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"> |
 <br/>
 <br/>
 
-# 2. 코드 주요 기능 및 공통 특징
+# 3. 코드 주요 기능 및 공통 특징
 
 - **dbCon**:
 
@@ -35,7 +50,7 @@
 - **shuffle, random 명령어를 사용**:
   - 추가적으로 id를 입력하지 않아도 아이디를 정해진 범위내에서 랜덤으로 생성하는 기능 사용.
 
-# 3. Project Implementation (프로젝트 구현)
+# 4. Project Implementation (프로젝트 구현)
 <details>
 <summary><b>전체 쿼리문(Customer)</b></summary>
   
@@ -179,7 +194,7 @@ END;
 <br/>
 <br/>
 
-# 4. Project Structure (프로젝트 구조)
+# 5. Project Structure (프로젝트 구조)
 
 ```plaintext
 travleMVCProject/
@@ -204,7 +219,7 @@ travleMVCProject/
 └── README.md                # 프로젝트 개요 및 사용법
 ```
 
-# 5. Test view (테스트 화면)
+# 6. Test view (테스트 화면)
 
 <details>
 <summary><b>고객(Customer)</b></summary>
@@ -314,21 +329,7 @@ travleMVCProject/
 <br>
 <br>
 
-# 6. Technology Stack (기술 스택)
 
-## 6.1 Language
-
-|             |                                                                                                          |
-| ----------- | -------------------------------------------------------------------------------------------------------- |
-| ORACLE SQL Developer 21c | <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">   |
-| JAVA JDK 21 | <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">       |
-| Eclipse IDE | <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse logoColor=white"> |
-
-## 6.2 Collaboration Tool
-
-|        |                                                                                                               |
-| ------ | ------------------------------------------------------------------------------------------------------------- |
-| GITHUB | <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"> |
 
 <br/>
 
