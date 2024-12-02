@@ -209,7 +209,7 @@ travleMVCProject/
 |                                            # RegisterManager : 비즈니스 로직과 사용자 상호작용 관련 클래스 파일.
 │   └── com.kh.travelMVCProject.model
 │                                   └── Customer, Guide, Package, Reservation, ReservationAll, Review VO 파일
-                                        # VO : 데이터를 객체로 관리하기 위해 사용하는 클래스 파일.
+|                                       # VO : 데이터를 객체로 관리하기 위해 사용하는 클래스 파일.
 |   └── com.kh.travelMVCProject.view
 |                                  └── CUSTOMER, GUIDE, MENU, PACKAGE,RESERVETION, REVIEW _CHOICE 파일
 |                                  └── MenuViewer 파일
