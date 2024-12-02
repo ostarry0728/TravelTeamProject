@@ -273,6 +273,7 @@ END;
 ![image](https://github.com/user-attachments/assets/4e2fbe91-1770-46f7-9b9b-11426e368a8a)
 
 <p>3. 수정하기</p>
+
 ![image](https://github.com/user-attachments/assets/b15c66af-30aa-440f-b644-0837e96e97b8)
 
 <p>4. 삭제하기</p>
