@@ -5,6 +5,8 @@
 이에 대한 예약도 진행이 가능하며, 예약에 대한 리뷰 작성 기능까지 포함한 미니 프로젝트입니다. <br>
 입력된 정보에 대하여 수정, 삭제 기능이 포함되어 있으며, 특정 기준에 따라 정렬 기능을 추가했습니다.
 </p>
+<br>
+<br>
 
 ## ⚙Tech Stack
 <p><strong> Window <br></strong>
@@ -19,6 +21,12 @@
 <br>
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"> 
 </p>
+<p><strong> Software <br></strong>
+<br>
+<img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
+</p>
+<br>
+<br>
 <br>
 
 ## 💾 Project Implementation
@@ -138,6 +146,8 @@ END;
 ```
 ![image](https://github.com/user-attachments/assets/94464c3c-9f1b-4536-87aa-843367f7854b)
 <br>
+<br>
+<br>
 
 
 
@@ -171,6 +181,8 @@ END;
 //
 </details>
 
+<br>
+<br>
 <br>
 
 ## 👨‍👩‍👧‍👦 Member
