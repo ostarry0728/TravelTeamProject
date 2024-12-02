@@ -1,9 +1,7 @@
-<br/>
-
 # 1. Project Overview (프로젝트 개요)
 
 - 프로젝트 이름: 여행사 관리 시스템
-- 프로젝트 설명: 여행사 고객, 상품, 가이드, 리뷰 등등의 데이터를 관리하는 시스템으로 설계했습니다.
+- 프로젝트 설명: 여행사 고객, 상품, 가이드, 리뷰 등등의 데이터를 관리하는 시스템으로 설계했습니다.<br>
    시스템 내에서 데이터를 조회, 입력, 수정, 삭제(CURD) 할 수 있게 기능을 구현한 미니 프로젝트입니다.
 
 <br/>
@@ -172,7 +170,11 @@ END;
 </details>
 
 
+![123](https://github.com/user-attachments/assets/36cf1609-5b5b-4218-a5ea-180ff3e9985d)
+
+
 ![1234](https://github.com/user-attachments/assets/68d5b5e7-3ba9-451b-9536-6120469f80cc)
+
 
 <br/>
 <br/>
@@ -318,8 +320,8 @@ travleMVCProject/
 
 |             |                                                                                                          |
 | ----------- | -------------------------------------------------------------------------------------------------------- |
-| ORACLE SQL Developer | <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">   |
-| JAVA        | <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">       |
+| ORACLE SQL Developer 21c | <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">   |
+| JAVA JDK 21 | <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">       |
 | Eclipse IDE | <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse logoColor=white"> |
 
 ## 6.2 Collaboration Tool
