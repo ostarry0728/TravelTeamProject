@@ -110,21 +110,43 @@ public class ReservationDAO {
     // 예약 정보를 추가
     public boolean reservationInsert(ReservationVO rvo) {
         boolean successFlag = false;
-        try (Connection con = DBUtility.dbCon();
-             PreparedStatement pstmt = con.prepareStatement(RESERVATION_INSERT)) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+        try {
+	        con = DBUtility.dbCon();
+	        con.setAutoCommit(false); // 자동 커밋 비활성화
+	        
+        	 pstmt = con.prepareStatement(RESERVATION_INSERT);
+        	 pstmt.setString(1, rvo.getID());
+             pstmt.setString(2, rvo.getCustID());
+             pstmt.setString(3, rvo.getPackID());
+             pstmt.setString(4, rvo.getMethod());
+             pstmt.setDate(5, rvo.getrDate()); // RDATE 추가
 
-            pstmt.setString(1, rvo.getID());
-            pstmt.setString(2, rvo.getCustID());
-            pstmt.setString(3, rvo.getPackID());
-            pstmt.setString(4, rvo.getMethod());
-            pstmt.setDate(5, rvo.getrDate()); // RDATE 추가
 
+//             int count = pstmt.executeUpdate();
+//             successFlag = (count != 0);
+ 	        // 쿼리 실행
+ 	        int result = pstmt.executeUpdate();
+ 	        if (result > 0) {
+ 	            con.commit(); // 변경 사항 커밋
+ 	            successFlag = true;
+ 	        } else {
+ 	            con.rollback(); // 실패 시 롤백
+ 	        }
+	    } catch (SQLException e) {
+	        System.out.println("SQL 예외 발생: " + e.getMessage());
+	        try {
+	            if (con != null) con.rollback(); // 오류 발생 시 롤백
+	        } catch (SQLException rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
+	    } finally {
+	        DBUtility.dbClose(con, pstmt); // 자원 해제
+	    }
 
-            int count = pstmt.executeUpdate();
-            successFlag = (count != 0);
-        } catch (SQLException e) {
-            System.out.println("Error in reservationInsert: " + e.getMessage());
-        }
-        return successFlag;
-    }
+	    return successFlag;
+	}
+    
+    
 }
