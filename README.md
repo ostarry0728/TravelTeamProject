@@ -35,7 +35,7 @@
 - **shuffle, random 명령어를 사용**:
   - 추가적으로 id를 입력하지 않아도 아이디를 정해진 범위내에서 랜덤으로 생성하는 기능 사용.
 
-# 3. Project Implementation  
+# 3. Project Implementation (프로젝트 구현)
 <details>
 <summary><b>전체 쿼리문(Customer)</b></summary>
   
@@ -204,7 +204,7 @@ travleMVCProject/
 └── README.md                # 프로젝트 개요 및 사용법
 ```
 
-# 5. Test view
+# 5. Test view (테스트 화면)
 
 <details>
 <summary><b>고객(Customer)</b></summary>
