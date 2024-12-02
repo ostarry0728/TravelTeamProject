@@ -25,10 +25,20 @@ public class ReservationVO {
 //		this.method = method;
 //		this.rDate = rDate;
 //	}
-	public ReservationVO(int no, String iD, String custID, String packID, String method, Date rDate) {
+	
+//	0, id, custID, packID, method, rdate
+	public ReservationVO(String ID, String custID, String packID, String method, Date rDate) {
+		super();
+		this.ID = ID;
+		this.custID = custID;
+		this.packID = packID;
+		this.method = method;
+		this.rDate = rDate;
+	}
+	public ReservationVO(int no, String ID, String custID, String packID, String method, Date rDate) {
 		super();
 		this.no = no;
-		ID = iD;
+		this.ID = ID;
 		this.custID = custID;
 		this.packID = packID;
 		this.method = method;
@@ -47,8 +57,8 @@ public class ReservationVO {
 		return ID;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
 	public String getCustID() {
@@ -100,11 +110,15 @@ public class ReservationVO {
 //	}
 	@Override
 	public String toString() {
+	    // rDate를 문자열로 변환
+	    String formattedDate = (rDate != null) ? rDate.toString() : "N/A";
+
 	    return String.format(
-	        "%-10d %-15s %-15s %-15s%-15s",
-	        no, ID, custID, packID, method, rDate
+	        "%-10d %-15s %-15s %-15s %-15s %-15s",
+	        no, ID, custID, packID, method, formattedDate
 	    );
 	}
+
 
 
 }

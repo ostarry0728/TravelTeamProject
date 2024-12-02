@@ -1,5 +1,6 @@
 package com.kh.travelMVCProject.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,14 +17,12 @@ public class ReservationRegisterManager {
 	public void insertManager() {
 	    ReservationDAO rdao = new ReservationDAO();
 	    CustomerDAO customerDAO = new CustomerDAO();
-	    CustomerVO cvo = new CustomerVO();
 	    PackageDAO packageDAO = new PackageDAO();
 
 	    System.out.print("예약 ID 입력>> ");
-	    String id = (sc.nextLine()).trim();
+	    String ID = (sc.nextLine()).trim();
 
-	    // 고객 리스트 출력
-	    ArrayList<CustomerVO> customerList = customerDAO.customerSelect(cvo);
+	    ArrayList<CustomerVO> customerList = customerDAO.customerSelect(new CustomerVO());
 	    if (customerList == null || customerList.isEmpty()) {
 	        System.out.println("고객 데이터가 없습니다.");
 	        return;
@@ -33,7 +32,6 @@ public class ReservationRegisterManager {
 	    System.out.print("고객 ID 입력>> ");
 	    String custID = (sc.nextLine()).trim();
 
-	    // 상품 리스트 출력
 	    ArrayList<PackageVO> packageList = packageDAO.packageSelect();
 	    if (packageList == null || packageList.isEmpty()) {
 	        System.out.println("상품 데이터가 없습니다.");
@@ -44,15 +42,13 @@ public class ReservationRegisterManager {
 	    System.out.print("상품 ID 입력>> ");
 	    String packID = (sc.nextLine()).trim();
 
-//	    System.out.print("예약 인원 입력>> ");
-//	    int rCapacity = Integer.parseInt((sc.nextLine()).trim());
-
 	    System.out.print("결제 방식 입력(CARD, CASH 등)>> ");
 	    String method = (sc.nextLine()).trim();
 
-	    // `RDATE`는 기본값으로 처리
-//	    ReservationVO rvo = new ReservationVO(0, id, custID, packID, rCapacity, method, null);
-	    ReservationVO rvo = new ReservationVO(0, id, custID, packID, method, null);
+	    // rdate 초기화
+	    Date rdate = new Date(System.currentTimeMillis());
+
+	    ReservationVO rvo = new ReservationVO(ID, custID, packID, method, rdate);
 	    boolean successFlag = rdao.reservationInsert(rvo);
 
 	    if (successFlag) {
@@ -61,6 +57,7 @@ public class ReservationRegisterManager {
 	        System.out.println("예약 등록에 실패했습니다.");
 	    }
 	}
+
 
 
 	// 예약 목록 조회 (Select)
@@ -267,7 +264,7 @@ public class ReservationRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-10s %-15s %-23s %-16s %-15s %-15s %-15s %-15s\n",
+	        "%-10s %-15s %-13s %-16s %-15s %-15s %-15s %-15s\n",
 	        "여행상품NO", "여행상품ID", "여행상품명", "여행할 국가", "가격", "가이드ID", "출국일", "입국일"
 	    );
 	    System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");
