@@ -102,7 +102,7 @@ public class ReservationRegisterManager {
 		}
 
 		// 화면으로부터 입력받는다.
-		System.out.print("삭제할 예약 번호 입력>> ");
+		System.out.print("삭제할 예약 번호(NO) 입력>> ");
 		int no = Integer.parseInt((sc.nextLine()).trim());
 
 		boolean successFlag = rdao.reservationDelete(no);
@@ -230,7 +230,7 @@ public class ReservationRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-15s %-14s %-13s %-14s %-15s\n",
+	        "%-8s %-10s %-12s %-13s %-8s %-10s\n",
 	        "예약No", "예약ID", "고객ID", "패키지ID", "결제방식", "예약날짜"
 	    );
 	    System.out.println("---------------------------------------------------------------------------------------------");
@@ -247,7 +247,7 @@ public class ReservationRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-15s %-15s %-13s %-10s %-8s %-24s %-13s\n",
+		        "%-7s %-10s %-9s %-10s %-7s %-7s %-22s %-12s\n",
 	        "고객No", "고객ID", "이름", "생년월일", "국적", "성별", "이메일", "전화번호"
 	    );
 	    System.out.println("-------------------------------------------------------------------------------------------------------------------------");
@@ -256,7 +256,6 @@ public class ReservationRegisterManager {
 	    for (CustomerVO data : customerList) {
 	        System.out.println(data.toString());
 	    }
-	    System.out.println();
 	}
 	
 	// arrayList
@@ -264,7 +263,7 @@ public class ReservationRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-10s %-15s %-13s %-16s %-15s %-15s %-15s %-15s\n",
+    	        "%-8s %-12s %-13s %-10s %-10s %-12s %-12s %-15s\n",
 	        "여행상품NO", "여행상품ID", "여행상품명", "여행할 국가", "가격", "가이드ID", "출국일", "입국일"
 	    );
 	    System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------");

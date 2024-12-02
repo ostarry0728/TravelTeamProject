@@ -160,7 +160,7 @@ public class PackageVO {
 	@Override
 	public String toString() {
 	    return String.format(
-	        "%-10d %-15s %-15s %-15s %-10d %-15s %-15s %-15s",
+    	        "%-8s %-13s %-13s %-10s %-10s %-13s %-13s %-15s",
 	        no, id, name, national, price, guideId, sDate, eDate
 	    );
 	}

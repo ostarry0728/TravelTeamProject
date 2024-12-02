@@ -246,7 +246,7 @@ public class ReviewRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-14s %-9s %-8s %-10s\n",
+	        "%-7s %-10s %-7s %-7s %-10s\n",
 	        "리뷰No", "예약ID", "가이드리뷰", "일정리뷰", "평균리뷰"
 	    );
 	    System.out.println("--------------------------------------------------------------");
@@ -254,7 +254,7 @@ public class ReviewRegisterManager {
 	    // 데이터 출력 (toString 사용)
 	    for (ReviewVO review : reviewList) {
 	        System.out.printf(
-	            "%-10d %-15s %-10d %-10d %-10.2f\n",
+	    	        "%-7s %-11s %-8s %-7s %-10s\n",
 	            review.getNo(), review.getReservId(), review.getGuideReview(),
 	            review.getScheReview(), review.getAvgReview()
 	        );
@@ -273,7 +273,7 @@ public class ReviewRegisterManager {
 	public void printReservationList(ArrayList<ReservationVO> reservationList) {
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-10s %-15s %-15s %-15s %-15s %-15s\n",
+		        "%-8s %-10s %-12s %-13s %-8s %-10s\n",
 	        "예약No", "예약ID", "고객ID", "패키지ID", "결제방법", "예약날짜"
 	    );
 	    System.out.println("---------------------------------------------------------------------------------------------");

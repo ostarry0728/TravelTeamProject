@@ -182,14 +182,14 @@ public class CustomerDAO {
 	private void printSingleCustomer(CustomerVO cvo) {
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-15s %-15s %-13s %-10s %-8s %-24s %-13s\n",
+		        "%-7s %-10s %-9s %-10s %-7s %-7s %-22s %-12s\n",
 	        "고객No", "고객ID", "이름", "생년월일", "국적", "성별", "이메일", "전화번호"
 	    );
 	    System.out.println("-------------------------------------------------------------------------------------------------------------------------");
 
 	    // 삽입된 고객 데이터 출력
 	    System.out.printf(
-	        "%-9d %-15s %-15s %-13d %-10s %-8s %-24s %-13s\n",
+		        "%-7s %-11s %-8s %-11s %-7s %-7s %-23s %-12s\n",
 	        cvo.getNo(), cvo.getId(), cvo.getName(), cvo.getBirth(),
 	        cvo.getNational(), cvo.getGender(), cvo.getEmail(), cvo.getPhone()
 	    );

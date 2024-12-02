@@ -69,7 +69,7 @@ public class ReviewVO {
 	@Override
 	public String toString() {
 	    return String.format(
-	        "%-10d %-15s %-15s %-15s %-15.2f",
+    	        "%-7s %-11s %-8s %-7s %-10s\n",
 	        no, reservId, guideReview, scheReview, avgReview
 	    );
 	}

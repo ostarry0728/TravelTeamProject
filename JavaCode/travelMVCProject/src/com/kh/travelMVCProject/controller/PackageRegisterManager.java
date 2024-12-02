@@ -325,7 +325,7 @@ public class PackageRegisterManager {
 	    System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-10s %-15s %-10s %-15s %-10s %-15s %-15s %-15s\n",
+    	        "%-8s %-12s %-13s %-10s %-10s %-12s %-12s %-15s\n",
 	        "여행상품NO", "여행상품ID", "여행상품명", "여행할 국가", "가격", "가이드ID", "출국일", "입국일"
 	    );
 	    System.out.println("---------------------------------------------------------------------------------------------------------------------------------------");
@@ -333,7 +333,7 @@ public class PackageRegisterManager {
 	    // 데이터 출력 (toString 사용)
 	    for (PackageVO data : packageList) {
 	        System.out.printf(
-	            "%-10d %-15s %-20s %-15s %-10d %-15s %-15s %-15s\n",
+	    	        "%-8s %-13s %-13s %-10s %-10s %-13s %-13s %-15s\n",
 	            data.getNo(), data.getId(), data.getName(), data.getNational(),
 	            data.getPrice(), data.getGuideId(), data.getSDate(), data.getEDate()
 	        );
@@ -347,7 +347,7 @@ public class PackageRegisterManager {
 	    System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-14s %-15s %-14s %-20s\n",
+	    	    "%-6s %-10s %-8s %-15s %-10s\n",
 	        "가이드No", "가이드ID", "이름", "전화번호", "가능언어"
 	    );
 	    System.out.println("----------------------------------------------------------------------------");

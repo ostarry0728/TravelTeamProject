@@ -153,7 +153,7 @@ public class CustomerRegisterManager {
 	private void printCustomerList(ArrayList<CustomerVO> customerList) {
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-15s %-15s %-13s %-10s %-8s %-30s %-15s\n",
+		        "%-7s %-10s %-9s %-10s %-7s %-7s %-22s %-12s\n",
 	        "고객No", "고객ID", "이름", "생년월일", "국적", "성별", "이메일", "전화번호"
 	    );
 	    System.out.println("-------------------------------------------------------------------------------------------------------------------------");
@@ -161,7 +161,7 @@ public class CustomerRegisterManager {
 	    // 데이터 출력
 	    for (CustomerVO data : customerList) {
 	        System.out.printf(
-	            "%-9d %-15s %-15s %-13d %-10s %-8s %-30s %-15s\n",
+			        "%-7s %-11s %-8s %-11s %-7s %-7s %-23s %-12s\n",
 	            data.getNo(), data.getId(), data.getName(), data.getBirth(),
 	            data.getNational(), data.getGender(), data.getEmail(), data.getPhone()
 	        );

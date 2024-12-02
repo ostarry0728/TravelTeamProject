@@ -9,7 +9,15 @@ public class GuideVO {
 
 	public GuideVO() {
 	}
-
+//	id, name, phone, languages
+	
+	public GuideVO(String id, String name, String phone, String languages) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.languages = languages;
+	}
 	public GuideVO(int no, String id, String name, String phone, String languages) {
 		super();
 		this.no = no;
@@ -62,7 +70,7 @@ public class GuideVO {
 	@Override
 	public String toString() {
 	    return String.format(
-	        "%-10d %-15s %-15s %-15s %-20s",
+	    	    "%-6s %-11s %-8s %-15s %-10s",
 	        no, id, name, phone, languages
 	    );
 	}

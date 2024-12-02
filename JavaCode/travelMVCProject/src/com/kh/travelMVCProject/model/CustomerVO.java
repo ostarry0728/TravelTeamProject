@@ -96,7 +96,7 @@ public class CustomerVO {
 	@Override
 	public String toString() {
 	    return String.format(
-	        "%-9s %-15s %-15s %-13s %-10s %-8s %-30s %-15s",
+		        "%-7s %-11s %-8s %-11s %-7s %-7s %-23s %-12s",
 	        no, id, name, birth, national, gender, email, phone
 	    );
 	}

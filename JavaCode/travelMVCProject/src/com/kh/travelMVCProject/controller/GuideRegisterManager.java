@@ -41,7 +41,7 @@ public class GuideRegisterManager {
 		System.out.print("가이드가 사용하는 언어를 입력해주세요 :");
 		String languages = (sc.nextLine());
 
-		gvo = new GuideVO(0, id, name, phone, languages);
+		gvo = new GuideVO(id, name, phone, languages);
 		boolean successFlag = gdao.guideInsert(gvo);
 
 		if (successFlag == true) {
@@ -80,7 +80,7 @@ public class GuideRegisterManager {
 			return;
 		}
 		// 수정할 정보
-		System.out.print("수정할 가이드의 번호를 선택하세요 >> ");
+		System.out.print("수정할 가이드의 번호(NO)를 선택하세요 >> ");
 		int no = Integer.parseInt((sc.nextLine()).trim());
 		String id = makeId();
 		System.out.print("수정할 가이드의 이름을 입력해주세요 >> ");
@@ -114,7 +114,7 @@ public class GuideRegisterManager {
 			return;
 		}
 
-		System.out.print("삭제할 가이드 번호를 입력하세요 : ");
+		System.out.print("삭제할 가이드 번호(NO)를 입력하세요 : ");
 		int no = Integer.parseInt((sc.nextLine()).trim());
 
 		gvo = new GuideVO();
@@ -146,7 +146,7 @@ public class GuideRegisterManager {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	        "%-9s %-14s %-15s %-14s %-20s\n",
+	    	    "%-6s %-10s %-8s %-15s %-10s\n",
 	        "가이드No", "가이드ID", "이름", "전화번호", "가능언어"
 	    );
 	    System.out.println("----------------------------------------------------------------------------");

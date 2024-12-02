@@ -114,7 +114,7 @@ public class ReservationVO {
 	    String formattedDate = (rDate != null) ? rDate.toString() : "N/A";
 
 	    return String.format(
-	        "%-10d %-15s %-15s %-15s %-15s %-15s",
+		        "%-8s %-10s %-13s %-13s %-8s %-10s",
 	        no, ID, custID, packID, method, formattedDate
 	    );
 	}

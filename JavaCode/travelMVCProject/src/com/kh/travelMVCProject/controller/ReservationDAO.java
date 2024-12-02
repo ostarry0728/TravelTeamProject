@@ -80,7 +80,7 @@ public class ReservationDAO {
             if (count != 0) {
                 successFlag = true;
             }
-            System.out.println("Deleted rows: " + count);
+//            System.out.println("Deleted rows: " + count);
         } catch (SQLException e) {
             System.out.println("Error in reservationDelete: " + e.getMessage());
         }

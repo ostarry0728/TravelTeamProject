@@ -143,14 +143,14 @@ public class GuideDAO {
 		System.out.println();
 	    // 헤더 출력
 	    System.out.printf(
-	    	    "%-8s %-12s %-14s %-13s %-10s\n",
+	    	    "%-6s %-10s %-8s %-15s %-10s\n",
 	    	    "가이드No", "가이드ID", "이름", "전화번호", "가능언어"
 	    );
 	    System.out.println("-----------------------------------------------------------------");
 
 	    // 삽입된 고객 데이터 출력
 	    System.out.printf(
-	    		"%-8s %-12s %-14s %-13s %-10s\n",
+	    	    "%-6s %-11s %-8s %-15s %-10s\n",
 	        gvo.getNo(), gvo.getId(), gvo.getName(), gvo.getPhone(), gvo.getLanguages()
 	    );
 	    System.out.println();
