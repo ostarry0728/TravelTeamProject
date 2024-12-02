@@ -170,11 +170,18 @@ END;
 
 ### Test Case
 <details>
-<summary><b>👨‍👩‍👧‍👦 회원</b></summary>
-	<!-- <a href="https://github.com/user-attachments/files/15525372/userTest.pdf">
-		회원 Test Case 저장하기
-	</a>
-	<p><img alt="회원 Test Case" src="https://github.com/beyond-sw-camp/be08-1st-YesterdayWork-Bookify/assets/121468393/395622d8-4624-4cc5-a58b-fa82d5156775"></p> -->
+<summary><b>👨‍👩‍👧‍👦 고객</b></summary>
+<p>1. 출력하기</p>
+	![image](https://github.com/user-attachments/assets/46c861fd-7cd1-469c-ac7c-1f516f47b945)
+<p>2. 추가하기</p>
+	![image](https://github.com/user-attachments/assets/8801c050-6951-4a2c-b065-2e7522d06ea0)
+<p>3. 수정하기</p>
+	![image](https://github.com/user-attachments/assets/a70b22d7-c29d-40d5-ae82-49be406e6b5d)
+<p>4. 삭제하기</p>
+	![image](https://github.com/user-attachments/assets/b67b1fa5-1d2b-490e-8857-08beff4e9911)
+<p>5. 고객id 순으로 나열하기</p>
+	![image](https://github.com/user-attachments/assets/a56843aa-bf57-4b2a-bdda-94d90c91d868)
+
 </details>
 <details>
 <summary><b>🗂️ 고객 CRUD</b></summary>
